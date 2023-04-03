@@ -1,0 +1,14 @@
+#Original sequences
+*S1:ggcctctgcctaatcacacagatctaacaggattatttc
+*S2:ggcctctgccttataacacaaatcttaacaggactatttc
+*S3:ggcttcagcttatacacaaatcttaaacagggactattc
+
+#The result of ClustalX
+*S1:ggcctctgcctaatcacacagatct--aacagg-attatttc
+*S2:ggcctctgccttataacacaaatctt-aacagg-actatttc
+*S3:ggcttcagctta--tacacaaatcttaaacagggactattc
+
+#Our aligning result
+*S1:ggcctctgcctaatcacacagatct-aa-cag-gattatttc
+*S2:ggcctctgccttataacacaaatcttaa-cag-gactatttc
+*S3:ggcttcagc-ttata-cacaaatcttaaacagggactattc
