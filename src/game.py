@@ -10,7 +10,7 @@ def play_game(environement,agent,NUMBER_EPISODE,NUMBER_TEST):
         while not finish:
             choice = agent.make_choice(observation)
             old_obs = observation
-            observation, reward, truncated, info = environement.step(choice)
+            observation, reward, finish, truncated,info = environement.step(choice)
             agent.learn(old_obs, observation, choice, reward, finish)
 
     print("Begin testing")
