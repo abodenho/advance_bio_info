@@ -1,0 +1,26 @@
+from agent_q_learning import Agent_q_learning
+from game import play_game
+def experiance_template(): # DO NOT RUN
+    """
+    Experiment template, do not use !!! juste for copy paste with != values
+    """
+    # ----------------------------------------  INIT AGENT ---------------------------------------------
+
+    NUMBER_SEQUENCE = ...
+    NUMBER_STATE  = (NUMBER_SEQUENCE**(NUMBER_SEQUENCE-1) -1) / (NUMBER_SEQUENCE-1)
+    GAMMA = ...
+    ALPHA = ...
+    EPSILON = ...
+    agent = Agent_q_learning(NUMBER_SEQUENCE,(NUMBER_STATE),GAMMA,ALPHA,EPSILON)
+    # ----------------------------------------  INIT Environement ---------------------------------------------
+
+    PATH = ...
+    environement = ...
+    # ----------------------------------------  INIT GAME ---------------------------------------------
+
+    NUMBER_TRAINING_EPISODE = ...
+    NUMBER_TEST_EPISODE = ...
+
+    # ----------------------------------------  RUN experiment ---------------------------------------------
+
+    play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE)
