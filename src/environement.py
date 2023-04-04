@@ -3,7 +3,6 @@ import math
 from copy import deepcopy
 INFINITY = math.inf
 
-
 class Environement:
     def __init__(self,path_folder,type_parsing):
         ### Static information
@@ -13,7 +12,6 @@ class Environement:
         self.__list_key_sequence_choice = []
         self.__has_multiple_same_action = False
         self.finish = False
-
 
     def step(self,choice_agent):
         self.__list_key_sequence_choice.append(choice_agent)
@@ -25,15 +23,13 @@ class Environement:
 
         return  new_state,reward,self.finish,truncated,info
 
-
-
-
     def reset(self):
         self.__list_key_sequence_choice = []
         self.__has_multiple_same_action = False
         return 0
     def __calculate_obs(self):
-        pass
+        depth = len(self.__list_key_sequence_choice)
+        #TODO A FAIRE !!!!
 
     def __calculate_reward(self):
         if len(self.__list_key_sequence_choice) == 1:
@@ -90,3 +86,6 @@ class Environement:
         file.close()
 
         return sequence
+
+    def get_number_sequence(self):
+        return len(self.__dico_sequence)
