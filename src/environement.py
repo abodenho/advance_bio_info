@@ -1,10 +1,58 @@
 import os
+import math
+from copy import deepcopy
+INFINITY = math.inf
+
+
 class Environement:
     def __init__(self,path_folder,type_parsing):
+        ### Static information
         type_parsing = type_parsing.lower()
         self.__dico_sequence = self.__parse(path_folder,type_parsing)
+        ### Dynamic information
+        self.__list_key_sequence_choice = []
+        self.__has_multiple_same_action = False
+        self.finish = False
 
 
+    def step(self,choice_agent):
+        self.__list_key_sequence_choice.append(choice_agent)
+        truncated = self.__has_multiple_same_action
+        self.finish = (len(self.__list_key_sequence_choice) == len(self.__dico_sequence))
+        reward = self.__calculate_reward()
+        new_state = self.__calculate_obs()
+        info = (deepcopy(self.__list_key_sequence_choice),new_state)
+
+        return  new_state,reward,self.finish,truncated,info
+
+
+
+
+    def reset(self):
+        self.__list_key_sequence_choice = []
+        self.__has_multiple_same_action = False
+        return 0
+    def __calculate_obs(self):
+        pass
+
+    def __calculate_reward(self):
+        if len(self.__list_key_sequence_choice) == 1:
+            reward = 0
+        elif self.__has_reapeate_action():
+            reward = - INFINITY
+            self.__has_multiple_same_action = True
+
+        else:
+            reward = +10 #TODO ADD PART HO RAIE LIEN
+
+        return reward
+
+    def __has_reapeate_action(self):
+        last_action = self.__list_key_sequence_choice[-1]
+        rep = False
+        if last_action in self.__list_key_sequence_choice[:-1]:
+            rep = True
+        return rep
 
 
     def __parse(self,path_folder,type_parsing):
@@ -42,4 +90,3 @@ class Environement:
         file.close()
 
         return sequence
-
