@@ -7,15 +7,18 @@ from copy import deepcopy
 INFINITY = math.inf
 
 class Environement:
-    def __init__(self,path_folder,type_parsing,is_soft_tree = True):
+    def __init__(self,path_folder,type_parsing,tree_choice = 1):
         ### Static information
         type_parsing = type_parsing.lower()
         self.__dico_sequence = self.__parse(path_folder,type_parsing)
         self.number_sequence = self.__number_action = len(self.__dico_sequence)
-        if is_soft_tree:
+        if tree_choice == 1:
+            self.__tree_state = Stupid_tree()
+        elif tree_choice == 2:
             self.__tree_state = Soft_tree(self.number_sequence)
-        else:
+        elif tree_choice == 2:
             self.__tree_state = Hard_tree(self.number_sequence)
+
         ### Dynamic information
         self.__list_action = []
         self.__has_multiple_same_action = False

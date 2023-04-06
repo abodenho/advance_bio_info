@@ -1,5 +1,17 @@
 import itertools
 from copy import deepcopy
+class Stupid_tree:
+    def __init__(self):
+        self.__tree = {}
+        self.__state_number = 1
+    def get_state(self,action_list):
+        key = tuple(action_list)
+        if not (key in self.__tree):
+            self.__state_number += 1
+            self.__tree[key] = self.__state_number
+
+        return self.__tree[key]
+
 
 class Soft_tree:
     """
