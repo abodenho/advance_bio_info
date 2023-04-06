@@ -28,6 +28,9 @@ class Soft_tree:
     def get_state(self, path_action):
         return self.__tree[path_action]
 
+    def print_tree(self):
+        print(self.__tree)
+
 
 class Hard_tree:
     """
