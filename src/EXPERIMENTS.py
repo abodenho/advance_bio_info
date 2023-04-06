@@ -35,7 +35,7 @@ def experiance_1():
     Experiment 1 Hepatite C
     """
     # ----------------------------------------  INIT Environement ---------------------------------------------
-    PATH = "Dataset/Hepatitis_C"
+    PATH = "../Dataset/Hepatitis_C"
     TYPE_PARSING = "fasta"
     environement = Environement(PATH,TYPE_PARSING)
 
