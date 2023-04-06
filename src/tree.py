@@ -1,4 +1,5 @@
 import itertools
+from copy import deepcopy
 
 class Soft_tree:
     """
@@ -26,3 +27,52 @@ class Soft_tree:
 
     def get_state(self, path_action):
         return self.__tree[path_action]
+
+
+class Hard_tree:
+    """
+    Tree of state exactly like the article
+    """
+    STATE = 0
+    NUMBER_SEQUENCE = 0
+
+    class _Node:
+        def __init__(self, path_to_reach, state_number):
+            self.state = state_number
+            self.info = path_to_reach
+            self.is_leaf = True
+
+        def add_level(self):
+            if self.is_leaf:
+                self.__create_sons()
+            else:
+                for son in self.sons:
+                    son.add_level()
+
+        def __create_sons(self):
+            self.is_leaf = False
+            self.sons = []
+            for seq in range(1, Hard_tree.NUMBER_SEQUENCE + 1):
+                Hard_tree.STATE += 1
+                son_state = Hard_tree.STATE
+                path_son = deepcopy(self.info) + seq
+                self.sons.append(Hard_tree._Node(path_son, son_state))
+
+        def get_son(self, i):
+            return self.sons[i]
+    def __init__(self,number_sequence):
+        Hard_tree.NUMBER_SEQUENCE = number_sequence
+        self.__create_tree()
+    def __create_tree(self):
+        Hard_tree.STATE += 1
+        self.root = self._Node([], Hard_tree.STATE)
+        for _ in range(Hard_tree.NUMBER_SEQUENCE):
+            self.root.add_level()
+
+
+    def get_state(self,path_action):
+        node = self.root
+        for action in path_action :
+            node.get_son(action-1)
+
+        return node.state
