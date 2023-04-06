@@ -11,6 +11,10 @@ class Soft_tree:
         self.__number_state = 0
         self.__number_sequence = number_sequence
         self.__list_sequence = [*range(1, number_sequence + 1)]
+        self.__create_tree()
+
+    def __str__(self):
+        return repr(self.__tree)
 
     def __create_tree(self):
         self.__number_state += 1
@@ -25,11 +29,8 @@ class Soft_tree:
     def __create_height(self, height):
         return [p for p in itertools.product(self.__list_sequence, repeat=height)]
 
-    def get_state(self, path_action):
-        return self.__tree[path_action]
-
-    def print_tree(self):
-        print(self.__tree)
+    def get_state(self, path_action_list):
+        return self.__tree[tuple(path_action_list)]
 
 
 class Hard_tree:
@@ -66,6 +67,9 @@ class Hard_tree:
     def __init__(self,number_sequence):
         Hard_tree.NUMBER_SEQUENCE = number_sequence
         self.__create_tree()
+
+    def __str__(self):
+        return "One day maybe" #TODO LATEX
     def __create_tree(self):
         Hard_tree.STATE += 1
         self.root = self._Node([], Hard_tree.STATE)
@@ -73,9 +77,9 @@ class Hard_tree:
             self.root.add_level()
 
 
-    def get_state(self,path_action):
+    def get_state(self,path_action_list):
         node = self.root
-        for action in path_action :
+        for action in path_action_list :
             node.get_son(action-1)
 
         return node.state
