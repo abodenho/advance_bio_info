@@ -61,21 +61,27 @@ class Environement:
         return rep
 
 
-    def __parse(self,path_folder,type_parsing):
+    def __parse(self, path, type_parsing):
         """
         Parse all the files
         """
         dico_sequence = {}
         cmpt = 0
 
-        if path_folder[-1] == "/" or path_folder[-1] == "\\": # anyone have this problem
-            path_folder = path_folder[:-1]
+        if path[-1] == "/" or path[-1] == "\\": # anyone have this problem
+            path = path[:-1]
 
         if type_parsing == "fasta":
-            for file in os.listdir(path_folder):
-                path_file = path_folder + "/" + file
+            for file in os.listdir(path):
+                path_file = path + "/" + file
                 dico_sequence[cmpt] = self.__parse_fasta(path_file)
                 cmpt += 1
+        elif type_parsing == "txt":
+            list_sequence = self.__parse_txt(path)
+            for seq in list_sequence:
+                dico_sequence[cmpt] = seq
+                cmpt += 1
+
         return dico_sequence
     def __parse_fasta(self,path):
         """
@@ -94,6 +100,17 @@ class Environement:
         file.close()
 
         return sequence
+    def __parse_txt(self,path):
+        list_sequence = []
+        file = open(path, 'r')
+        line =file.readline()
+        while line != "\n":
+            line = file.readline()
+            if line != "\n" :
+                idx_begin_seqence = line.index(":") + 1
+                list_sequence.append(line[idx_begin_seqence:-1])
+        file.close()
+        return list_sequence
 
     def get_number_sequence(self):
         return len(self.__dico_sequence)
