@@ -1,56 +1,59 @@
 import os
 import math
+import random
+
+from tree import *
 from copy import deepcopy
 INFINITY = math.inf
 
 class Environement:
-    def __init__(self,path_folder,type_parsing):
+    def __init__(self,path_folder,type_parsing,is_soft_tree = True):
         ### Static information
         type_parsing = type_parsing.lower()
         self.__dico_sequence = self.__parse(path_folder,type_parsing)
-        self.__number_action = len(self.__dico_sequence)
-
+        self.number_sequence = self.__number_action = len(self.__dico_sequence)
+        if is_soft_tree:
+            self.__tree_state = Soft_tree(self.number_sequence)
+        else:
+            self.__tree_state = Hard_tree(self.number_sequence)
         ### Dynamic information
-        self.__list_key_sequence_choice = []
+        self.__list_action = []
         self.__has_multiple_same_action = False
         self.finish = False
 
-
-
     def step(self,choice_agent):
-        self.__list_key_sequence_choice.append(choice_agent)
+        self.__list_action.append(choice_agent)
         truncated = self.__has_multiple_same_action
-        self.finish = (len(self.__list_key_sequence_choice) == len(self.__dico_sequence))
+        self.finish = (len(self.__list_action) ==  self.number_sequence)
         reward = self.__calculate_reward()
         new_state = self.__calculate_obs()
-        info = (deepcopy(self.__list_key_sequence_choice),new_state)
+        info = (deepcopy(self.__list_action), new_state)
 
         return  new_state,reward,self.finish,truncated,info
 
     def reset(self):
-        self.__list_key_sequence_choice = []
+        self.__list_action = []
         self.__has_multiple_same_action = False
         return 0
     def __calculate_obs(self):
-        depth = len(self.__list_key_sequence_choice)
-        #TODO A FAIRE !!!!
+        return self.__tree_state.get_state(self.__list_action)
 
     def __calculate_reward(self):
-        if len(self.__list_key_sequence_choice) == 1:
+        if len(self.__list_action) == 1:
             reward = 0
         elif self.__has_reapeate_action():
             reward = - INFINITY
             self.__has_multiple_same_action = True
 
         else:
-            reward = +10 #TODO ADD PART HO RAIE LIEN
+            reward = random.randint(1,100) #TODO ADD PART HO RAIE LIEN
 
         return reward
 
     def __has_reapeate_action(self):
-        last_action = self.__list_key_sequence_choice[-1]
+        last_action = self.__list_action[-1]
         rep = False
-        if last_action in self.__list_key_sequence_choice[:-1]:
+        if last_action in self.__list_action[:-1]:
             rep = True
         return rep
 
@@ -70,8 +73,6 @@ class Environement:
                 path_file = path_folder + "/" + file
                 dico_sequence[cmpt] = self.__parse_fasta(path_file)
                 cmpt += 1
-
-
         return dico_sequence
     def __parse_fasta(self,path):
         """
