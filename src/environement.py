@@ -8,10 +8,14 @@ class Environement:
         ### Static information
         type_parsing = type_parsing.lower()
         self.__dico_sequence = self.__parse(path_folder,type_parsing)
+        self.__number_action = len(self.__dico_sequence)
+
         ### Dynamic information
         self.__list_key_sequence_choice = []
         self.__has_multiple_same_action = False
         self.finish = False
+
+
 
     def step(self,choice_agent):
         self.__list_key_sequence_choice.append(choice_agent)
@@ -58,7 +62,7 @@ class Environement:
         dico_sequence = {}
         cmpt = 0
 
-        if path_folder[-1] == "/" or path_folder[-1] == "\\": # any one have this problem
+        if path_folder[-1] == "/" or path_folder[-1] == "\\": # anyone have this problem
             path_folder = path_folder[:-1]
 
         if type_parsing == "fasta":
