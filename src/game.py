@@ -21,3 +21,4 @@ def play_game(environement,agent,NUMBER_EPISODE,NUMBER_TEST):
         while not finish:
             choice = agent.make_choice(observation)
             observation, reward, finish, truncated,info = environement.step(choice)
+        print("TESTING : ",i, "\t | Choice list : ",info[0])
