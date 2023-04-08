@@ -16,7 +16,7 @@ class Environement:
             self.__tree_state = Stupid_tree()
         elif tree_choice == 2:
             self.__tree_state = Soft_tree(self.number_sequence)
-        elif tree_choice == 2:
+        elif tree_choice == 3:
             self.__tree_state = Hard_tree(self.number_sequence)
 
         ### Dynamic information
@@ -39,7 +39,7 @@ class Environement:
         self.__has_multiple_same_action = False
         return 0
     def __calculate_obs(self):
-        return self.__tree_state.get_state(self.__list_action)
+        return (self.__tree_state.get_state(self.__list_action) - 1) #-1 because tree go from 1 to n**(n-1)-1/n-1 and q table begin at 0
 
     def __calculate_reward(self):
         if len(self.__list_action) == 1:

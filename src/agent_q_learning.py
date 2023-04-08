@@ -49,8 +49,8 @@ class Agent_q_learning:
                     action = [i]
                 elif self._go_through_state(current_state)[i] == best_value:
                     action.append(i)
-
-        self.epsilon = self.epsilon * self.decrease_espilon
+        if self.decrease_espilon:
+            self.epsilon = self.epsilon * self.decrease_espilon
         rep = random.choice(action)
 
         return rep

@@ -1,9 +1,12 @@
 import itertools
 from copy import deepcopy
 class Stupid_tree:
+    """
+    Creating state when encounter a new action path
+    """
     def __init__(self):
         self.__tree = {}
-        self.__state_number = 1
+        self.__state_number = 0
     def get_state(self,action_list):
         key = tuple(action_list)
         if not (key in self.__tree):
@@ -16,14 +19,18 @@ class Stupid_tree:
 class Soft_tree:
     """
     Soft tree more quicker to create and travel
+
+    action == state
     """
 
     def __init__(self, number_sequence):
         self.__tree = {}
         self.__number_state = 0
         self.__number_sequence = number_sequence
-        self.__list_sequence = [*range(1, number_sequence + 1)]
+        self.__list_sequence = [*range(number_sequence)]
         self.__create_tree()
+        print(self.__tree)
+
 
     def __str__(self):
         return repr(self.__tree)
@@ -32,7 +39,7 @@ class Soft_tree:
         self.__number_state += 1
         self.__tree[()] = self.__number_state
         maximal_height = self.__number_sequence
-        for height in range(1, maximal_height):
+        for height in range(1, maximal_height+1):
             list_state = self.__create_height(height)
             for key in list_state:
                 self.__number_state += 1
@@ -69,8 +76,8 @@ class Hard_tree:
             self.is_leaf = False
             self.sons = []
             for seq in range(1, Hard_tree.NUMBER_SEQUENCE + 1):
-                Hard_tree.STATE += 1
                 son_state = Hard_tree.STATE
+                Hard_tree.STATE += 1
                 path_son = deepcopy(self.info) + seq
                 self.sons.append(Hard_tree._Node(path_son, son_state))
 

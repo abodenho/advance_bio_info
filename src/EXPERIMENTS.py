@@ -15,7 +15,7 @@ def experiance_template(): # DO NOT RUN
     # ----------------------------------------  INIT AGENT ---------------------------------------------
 
     NUMBER_SEQUENCE = environement.get_number_sequence()
-    NUMBER_STATE  = int((NUMBER_SEQUENCE**(NUMBER_SEQUENCE-1) -1) / (NUMBER_SEQUENCE-1))
+    NUMBER_STATE  = int((NUMBER_SEQUENCE**(NUMBER_SEQUENCE+1) -1) / (NUMBER_SEQUENCE-1))
     GAMMA = ...
     ALPHA = ...
     EPSILON = ...
@@ -43,11 +43,11 @@ def experiment_3():
     # ----------------------------------------  INIT AGENT ---------------------------------------------
 
     NUMBER_SEQUENCE = environement.get_number_sequence()
-    NUMBER_STATE  = int((NUMBER_SEQUENCE**(NUMBER_SEQUENCE-1) -1) / (NUMBER_SEQUENCE-1))
+    NUMBER_STATE  = int((NUMBER_SEQUENCE**(NUMBER_SEQUENCE+1) -1) / (NUMBER_SEQUENCE-1))
     GAMMA = 0.9
     ALPHA = 0.8
     EPSILON = 0.8
-    LIST_POSSIBLE_ACTION = [*range(1,NUMBER_SEQUENCE+1)]
+    LIST_POSSIBLE_ACTION = [*range(NUMBER_SEQUENCE)]
     agent = Agent_q_learning(LIST_POSSIBLE_ACTION,[NUMBER_STATE],GAMMA,ALPHA,EPSILON)
 
     # ----------------------------------------  INIT GAME ---------------------------------------------
