@@ -34,10 +34,12 @@ def _compute_matrix(aligned_seqs, new_seq):
             best = max(s, key=lambda x: x[1])
             matrix[i+1][j+1] = best[1]
             directions[i+1][j+1] = best[0]
-    return directions
+
+    #print(np.array(matrix))
+    return directions, matrix[-1][-1] # TODO verify if it is this score
 
 def _find_path(aligned_seqs, new_seq):
-    directions = _compute_matrix(aligned_seqs, new_seq)
+    directions, final_score = _compute_matrix(aligned_seqs, new_seq)
     i = len(directions[0])-1
     j = len(directions)-1
     path = []
@@ -47,10 +49,10 @@ def _find_path(aligned_seqs, new_seq):
         i += dir[0]
         j += dir[1]
     path.reverse()
-    return path
+    return path, final_score
 
 def needleman_wunsch(seq1, seq2):
-    path = _find_path([seq1], seq2)
+    path, final_score = _find_path([seq1], seq2)
     seq1 = _generator(seq1)
     seq2 = _generator(seq2)
 
@@ -60,20 +62,17 @@ def needleman_wunsch(seq1, seq2):
         res1.append(next(seq1) if node[1] else '-')
         res2.append(next(seq2) if node[0] else '-')
 
-    print(''.join(res1))
-    print(''.join(res2))
-    return ''.join(res1), ''.join(res2)
+    return ''.join(res1), ''.join(res2), final_score
 
 def needleman_wunsch_multiple(aligned_seqs, seq):
-    path = _find_path(aligned_seqs, seq)
+    path, final_score = _find_path(aligned_seqs, seq)
     seq = _generator(seq)
 
     res = []
     for node in path:
         res.append(next(seq) if node[0] else '-')
 
-    print(''.join(res))
-    return ''.join(res)
+    return ''.join(res), final_score
 
 
 if __name__ == "__main__":
@@ -82,6 +81,6 @@ if __name__ == "__main__":
     elif len(sys.argv) > 3:
         needleman_wunsch_multiple(sys.argv[1:-1], sys.argv[-1])
     else:
-        seq1 = 'GAAAAAAT' #'GATTACA'
-        seq2 = 'GAAT'#'GCATGCG'
-        a,b = needleman_wunsch(seq1, seq2)
+        seq1 = 'GATTACA' #'GAAAAAAT'
+        seq2 = 'GCATGCG' #'GAAT'
+        a,b,c = needleman_wunsch(seq1, seq2)
