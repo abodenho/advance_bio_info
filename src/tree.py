@@ -7,6 +7,9 @@ class Stupid_tree:
     def __init__(self):
         self.__tree = {}
         self.__state_number = 0
+
+    def __repr__(self):
+        return repr(self.__tree)
     def get_state(self,action_list):
         key = tuple(action_list)
         if not (key in self.__tree):
@@ -29,7 +32,6 @@ class Soft_tree:
         self.__number_sequence = number_sequence
         self.__list_sequence = [*range(number_sequence)]
         self.__create_tree()
-        print(self.__tree)
 
 
     def __str__(self):

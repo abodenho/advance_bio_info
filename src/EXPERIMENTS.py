@@ -56,7 +56,8 @@ def experiment_1():
     NUMBER_TEST_EPISODE = 1
 
     # ----------------------------------------  RUN experiment ---------------------------------------------
-    play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE,True)
+    play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE,False)
+
 def experiment_2():
     """
     Experiment 2 : Papio Anubis
@@ -110,6 +111,7 @@ def experiment_3():
 
     # ----------------------------------------  RUN experiment ---------------------------------------------
     play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE)
+
 
 def experiment_4():
     """

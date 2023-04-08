@@ -69,9 +69,7 @@ class Classical_q_learning(Agent):
         super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
 
     def _create_q_table(self):
-        return np.zeros((self.univers,self.number_action),dtype=np.ushort)
-
-
+        return np.zeros((self.univers,self.number_action))
 
     def learn(self,current_state,new_state,action,reward,done):
         if done :
@@ -90,10 +88,8 @@ class Dynamic_q_learning(Agent):
         super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
         self.__add_state(0)
 
-
     def _create_q_table(self):
         return {}
-
 
     def __add_state(self,new_state):
         self.q_table[new_state] = np.zeros(len(self.list_action))
