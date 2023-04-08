@@ -1,4 +1,4 @@
-from classical_q_learning import Classical_q_learning
+from Agent import Classical_q_learning,Dynamic_q_learning
 from game import play_game
 from environement import Environement
 
@@ -48,7 +48,7 @@ def experiment_1():
     ALPHA = 0.8
     EPSILON = 0.8
     LIST_POSSIBLE_ACTION = [*range(NUMBER_SEQUENCE)]
-    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
+    agent = Dynamic_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
 
     # ----------------------------------------  INIT GAME ---------------------------------------------
 
@@ -56,7 +56,7 @@ def experiment_1():
     NUMBER_TEST_EPISODE = 1
 
     # ----------------------------------------  RUN experiment ---------------------------------------------
-    play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE)
+    play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE,True)
 def experiment_2():
     """
     Experiment 2 : Papio Anubis
@@ -101,7 +101,7 @@ def experiment_3():
     ALPHA = 0.8
     EPSILON = 0.8
     LIST_POSSIBLE_ACTION = [*range(NUMBER_SEQUENCE)]
-    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, [NUMBER_STATE], GAMMA, ALPHA, EPSILON)
+    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
 
     # ----------------------------------------  INIT GAME ---------------------------------------------
 
@@ -128,7 +128,7 @@ def experiment_4():
     ALPHA = 0.8
     EPSILON = 0.8
     LIST_POSSIBLE_ACTION = [*range(NUMBER_SEQUENCE)]
-    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, [NUMBER_STATE], GAMMA, ALPHA, EPSILON)
+    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
 
     # ----------------------------------------  INIT GAME ---------------------------------------------
 
@@ -156,7 +156,7 @@ def experiment_5():
     ALPHA = 0.8
     EPSILON = 0.8
     LIST_POSSIBLE_ACTION = [*range(NUMBER_SEQUENCE)]
-    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, [NUMBER_STATE], GAMMA, ALPHA, EPSILON)
+    agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
 
     # ----------------------------------------  INIT GAME ---------------------------------------------
 

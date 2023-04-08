@@ -19,23 +19,15 @@ class Agent:
         self.epsilon = epsilon
         self.decrease_espilon = decrease_espilon
         self.number_action = len(list_action)
+        self.q_table = self._create_q_table()
 
-    def make_choice(self,current_state):
-        raise NotImplemented
 
-    def learn(self,current_state,new_state,action,reward,done):
-        raise NotImplemented
 
-class Classical_q_learning(Agent):
-    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None):
-        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
-        self._create_q_table()
     def _create_q_table(self):
-        self.q_table = np.zeros((self.univers,self.number_action),dtype=np.ushort)
-
-    def make_choice(self,current_state):
+            raise NotImplemented
+    def make_choice(self, current_state):
         random_value = random.random()
-        if  random_value < self.epsilon:
+        if random_value < self.epsilon:
             action = [random.choice(self.list_action)]
         else:
             best_action = None
@@ -58,13 +50,7 @@ class Classical_q_learning(Agent):
         return rep
 
     def learn(self,current_state,new_state,action,reward,done):
-        if done :
-            self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
-                                              + self.alpha * (reward)
-        else:
-            self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
-                                                  + self.alpha * (reward + self.gamme * self._maxQ(new_state))
-
+        raise NotImplemented
 
     def _maxQ(self,new_state):
         best_q = float('-inf')
@@ -74,3 +60,56 @@ class Classical_q_learning(Agent):
         return best_q
 
 
+
+class Classical_q_learning(Agent):
+    """
+    Classical q learning agent which create q table at the begining
+    """
+    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None):
+        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
+
+    def _create_q_table(self):
+        return np.zeros((self.univers,self.number_action),dtype=np.ushort)
+
+
+
+    def learn(self,current_state,new_state,action,reward,done):
+        if done :
+            self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
+                                              + self.alpha * (reward)
+        else:
+            self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
+                                                  + self.alpha * (reward + self.gamme * self._maxQ(new_state))
+
+
+class Dynamic_q_learning(Agent):
+    """
+    Dynamic q learning agent which create q table during the learning process
+    """
+    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None):
+        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
+        self.__add_state(0)
+
+
+    def _create_q_table(self):
+        return {}
+
+
+    def __add_state(self,new_state):
+        self.q_table[new_state] = np.zeros(len(self.list_action))
+
+    def learn(self,current_state,new_state,action,reward,done):
+        if not new_state in self.q_table:
+            self.__add_state(new_state)
+
+        if done :
+            self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
+                                              + self.alpha * (reward)
+        else:
+            self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
+                                                  + self.alpha * (reward + self.gamme * self._maxQ(new_state))
+
+    def make_choice(self,state):
+        if not state in self.q_table:
+            self.__add_state(state)
+        return super().make_choice(state)

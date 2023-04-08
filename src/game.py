@@ -4,19 +4,20 @@ def play_game(environement,agent,NUMBER_EPISODE,NUMBER_TEST,stop_to_truncated = 
         end = False
         observation = environement.reset()
 
-        if (episode % 100 == 0):
+        if (episode % 1000 == 0):
             print("pourcentage ", round(episode / NUMBER_EPISODE *100, 3),"%")
 
         while not end:
             choice = agent.make_choice(observation)
             old_obs = observation
             observation, reward, finish, truncated,info = environement.step(choice)
-            agent.learn(old_obs, observation, choice, reward, finish)
-
             if stop_to_truncated:
                 end = finish or truncated
             else:
                 end = finish
+            agent.learn(old_obs, observation, choice, reward, end)
+
+
 
     print("Begin testing")
     agent.epsilon = 0
