@@ -78,7 +78,7 @@ class Hard_tree:
             for seq in range(1, Hard_tree.NUMBER_SEQUENCE + 1):
                 son_state = Hard_tree.STATE
                 Hard_tree.STATE += 1
-                path_son = deepcopy(self.info) + seq
+                path_son = (deepcopy(self.info)).append(seq)
                 self.sons.append(Hard_tree._Node(path_son, son_state))
 
         def get_son(self, i):

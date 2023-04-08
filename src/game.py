@@ -5,7 +5,7 @@ def play_game(environement,agent,NUMBER_EPISODE,NUMBER_TEST):
         observation = environement.reset()
 
         if (episode % 100 == 0):
-            print("pourcentage ", round(episode / NUMBER_EPISODE, 3),"%")
+            print("pourcentage ", round(episode / NUMBER_EPISODE *100, 3),"%")
 
         while not finish:
             choice = agent.make_choice(observation)
