@@ -39,7 +39,6 @@ def experiment_1():
     PATH = "../Dataset/Hepatitis_C"
     TYPE_PARSING = "fasta"
     environement = Environement(PATH,TYPE_PARSING)
-    print(environement)
 
     # ----------------------------------------  INIT AGENT ---------------------------------------------
 

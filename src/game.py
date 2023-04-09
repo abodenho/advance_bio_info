@@ -1,3 +1,5 @@
+from needleman_wunsch import compute_score
+
 def play_game(environement,agent,NUMBER_EPISODE,NUMBER_TEST,stop_to_truncated = False):
     print("Begin training")
     for episode in range(NUMBER_EPISODE):
@@ -29,7 +31,7 @@ def play_game(environement,agent,NUMBER_EPISODE,NUMBER_TEST,stop_to_truncated = 
                 end = finish or truncated
             else:
                 end = finish
-        print("TESTING : ",i, "\t | Choice list : ",info[0])
+        print("SCORE : ", compute_score(info[2]), "\t | Choice list : ",info[0])
 
         for seq_aling in info[2]:
             print(seq_aling)

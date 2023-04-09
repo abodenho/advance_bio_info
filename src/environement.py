@@ -40,18 +40,16 @@ class Environement:
                         seq2 = self.actual_sequences_encounter[1]
 
                         #Calculate info
-                        seq1_align, seq2_align, score = needleman_wunsch(deepcopy(seq1),deepcopy(seq2))
-
+                        self.actual_sequences_aligned = needleman_wunsch(deepcopy(seq1),deepcopy(seq2)) # TODO opti nécéssaire
+                        score = compute_score(self.actual_sequences_aligned)
                         ## Update info
-                        self.actual_sequences_aligned.append(seq1_align)
-                        self.actual_sequences_aligned.append(seq2_align)
                         self.known_alignement_sequence_score[action_list] = score
                         self.known_alignement_sequence[action_list] = deepcopy(self.actual_sequences_aligned)
 
 
                     else:  # multiple alignement
-                        new_seq_alignement, score = needleman_wunsch_multiple(deepcopy(self.actual_sequences_aligned),deepcopy(sequence))
-                        self.actual_sequences_aligned.append(new_seq_alignement)
+                        self.actual_sequences_aligned = needleman_wunsch(deepcopy(self.actual_sequences_aligned),deepcopy(sequence))
+                        score = compute_score(self.actual_sequences_aligned)
                         self.known_alignement_sequence_score[action_list] = score
                         self.known_alignement_sequence[action_list] = deepcopy(self.actual_sequences_aligned)
             return score
