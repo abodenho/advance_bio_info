@@ -1,7 +1,7 @@
 from Agent import Classical_q_learning,Dynamic_q_learning
 from game import play_game
 from environement import Environement
-
+from data_garbage import Data_garbage
 
 def experiment_1():
     """
@@ -11,7 +11,7 @@ def experiment_1():
     PATH = "../Dataset/Hepatitis_C"
     TYPE_PARSING = "fasta"
 
-    experiment(PATH,TYPE_PARSING, USE_DYNAMIC_AGENT=True,VERBOSE=True)
+    return experiment(PATH,TYPE_PARSING, USE_DYNAMIC_AGENT=True,VERBOSE=True)
 
 
 def experiment_2():
@@ -22,7 +22,7 @@ def experiment_2():
     PATH = "../Dataset/Papio_Anubis"
     TYPE_PARSING = "fasta"
 
-    experiment(PATH,TYPE_PARSING)
+    return experiment(PATH,TYPE_PARSING,VERBOSE=True)
 
 
 def experiment_3():
@@ -33,7 +33,7 @@ def experiment_3():
     PATH = "../Dataset/Dataset_1.txt"
     TYPE_PARSING = "txt"
 
-    experiment(PATH, TYPE_PARSING)
+    return experiment(PATH, TYPE_PARSING)
 
 
 def experiment_4():
@@ -44,7 +44,7 @@ def experiment_4():
     PATH = "../Dataset/Lemur_gorilla_mouse.txt"
     TYPE_PARSING = "txt"
 
-    experiment(PATH,TYPE_PARSING)
+    return experiment(PATH,TYPE_PARSING)
 
 
 
@@ -56,10 +56,10 @@ def experiment_5():
     PATH = "../Dataset/Rat_lemur_opossum.txt"
     TYPE_PARSING = "txt"
 
-    experiment(PATH,TYPE_PARSING)
+    return experiment(PATH,TYPE_PARSING)
 
 
-def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.8, NUMBER_TRAINING_EPISODE = 10**4, NUMBER_TEST_EPISODE = 5,NUMBER_REPITION_EXPERIMENT = 25, USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = False,VERBOSE = False) :
+def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 5, USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False) :
 
 
     # ----------------------------------------  INIT Environement ---------------------------------------------
@@ -77,9 +77,11 @@ def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.8, NUMBE
         agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
 
     # ----------------------------------------  RUN experiment ---------------------------------------------
-
+    data_keeper = Data_garbage()
     for experiment in range(NUMBER_REPITION_EXPERIMENT):
         print("Repetion number ",experiment, "of the experiment")
-        play_game(environement,agent,NUMBER_TRAINING_EPISODE,NUMBER_TEST_EPISODE,TRONCATE,VERBOSE)
+        data_keeper.begin_new_experiment()
+        play_game(environement,agent,NUMBER_TRAINING_EPISODE,data_keeper,TRONCATE,VERBOSE)
         print("*"*50)
+    return data_keeper
 
