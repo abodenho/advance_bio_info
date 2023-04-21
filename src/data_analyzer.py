@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 import os
+
+import numpy as np
+
+
 def plot_time(list_time, name,stop_to = None):
 
     if stop_to:
@@ -84,13 +88,15 @@ def experiment_analyzer(data,SAVE_TO,stop_to = 100):
 
     running_info = data.get_info_experiment()
 
-    number_episode_before_reach_best_score, time_to_reach_best_score  = get_best_info(time_series,best_score_average)
+    mean_episode, mean_time, std_episode, std_time  = get_best_info(data)
     with open(name + '.txt', 'w') as f:
         string_info = "SCORE : " + str(score) + "\nAL : " \
                       + str(AL) + "\nEM : " + str(EM) + "\nCS : " + str(CS) + "\n"
         f.write(string_info)
-        f.write("Number episode before reach best score : " + str(number_episode_before_reach_best_score) + "\n")
-        f.write("Time to reach best score : " + str(time_to_reach_best_score) + "\n")
+        f.write("Average episode to best score : " + str(mean_episode) + "\n")
+        f.write("Average time to best score : " + str(mean_time) + "\n")
+        f.write("STD episode to best score : " + str(std_episode) + "\n")
+        f.write("STD  time to best score : " + str(std_time) + "\n")
         for key in running_info:
             string = key + " : "+str(running_info[key]) + "\n"
             f.write(string)
@@ -99,14 +105,23 @@ def experiment_analyzer(data,SAVE_TO,stop_to = 100):
     plot_score(score_average,name,stop_to)
     plot_best_score(best_score_average,name,stop_to)
 
-def get_best_info(time_series,best_score_average):
-    best_score = best_score_average[-1]
-    number_episode_to_reach_best_score = "error"
-    time_to_reach_best_score = "error"
-    for episode in range(len(best_score_average)):
-        if best_score_average[episode] == best_score:
-            number_episode_to_reach_best_score = episode + 1 # +1 because we count at 1
-            time_to_reach_best_score = time_series[episode]
-            break
+def get_best_info(data):
+    list_time_best_score = []
+    list_episode_best_score = []
+    for expirement in range(data.get_number_experiment()):
+        best_score_average = data.get_best_score_serie(expirement)
+        time_series = data.get_time_serie(expirement)
+        best_score = best_score_average[-1]
+        for episode in range(len(best_score_average)):
+            if best_score_average[episode] == best_score:
+                list_episode_best_score.append(episode + 1) # +1 because we count at 1
+                list_time_best_score.append(time_series[episode])
+                break
 
-    return number_episode_to_reach_best_score, time_to_reach_best_score
+    mean_episode = np.mean(list_episode_best_score)
+    mean_time = np.mean(list_time_best_score)
+    std_episode = np.std(list_episode_best_score)
+    std_time = np.std(list_time_best_score)
+
+
+    return mean_episode, mean_time, std_episode, std_time

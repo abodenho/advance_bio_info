@@ -4,19 +4,28 @@ import os
 
 PATH_SAVE_DATA = "../data_experiment/"
 
+STOP_TO = { # COPY of article information
+    1 : 150,
+    2 : 210,
+    3 : 150,
+    4 : 150,
+    5 : 250
+}
+
 def run_all_experimnet(gather_data = True):
 
     if gather_data and not os.path.isdir(PATH_SAVE_DATA):
         os.mkdir(PATH_SAVE_DATA)
 
     for i in range(1,6):
+        print("--"*30,"Begin experiment :",i)
         data = eval("experiment_{}()".format(i))
         name_experimnet = data.get_name()
-        print("--"*30,"END experiment ",name_experimnet ,"--"*30)
+        print("END experiment ",name_experimnet ,"--"*30)
         if gather_data and not os.path.isdir(PATH_SAVE_DATA + name_experimnet):
             os.mkdir(PATH_SAVE_DATA + name_experimnet)
-
-        experiment_analyzer(data,PATH_SAVE_DATA)
+        stop_to = STOP_TO[i]
+        experiment_analyzer(data,PATH_SAVE_DATA,stop_to)
 
 if __name__ == "__main__":
     run_all_experimnet()
