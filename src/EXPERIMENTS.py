@@ -11,8 +11,10 @@ def experiment_1():
     PATH = "../Dataset/Hepatitis_C"
     TYPE_PARSING = "fasta"
 
-    return experiment(PATH,TYPE_PARSING, USE_DYNAMIC_AGENT=True,VERBOSE=True)
+    data =  experiment(PATH,TYPE_PARSING, USE_DYNAMIC_AGENT=True,VERBOSE=True)
+    data.set_name("Hepatitis_C")
 
+    return data
 
 def experiment_2():
     """
@@ -22,8 +24,9 @@ def experiment_2():
     PATH = "../Dataset/Papio_Anubis"
     TYPE_PARSING = "fasta"
 
-    return experiment(PATH,TYPE_PARSING,VERBOSE=True)
-
+    data =  experiment(PATH,TYPE_PARSING,VERBOSE=True)
+    data.set_name("Papio_Anubis")
+    return data
 
 def experiment_3():
     """
@@ -33,7 +36,9 @@ def experiment_3():
     PATH = "../Dataset/Dataset_1.txt"
     TYPE_PARSING = "txt"
 
-    return experiment(PATH, TYPE_PARSING)
+    data =  experiment(PATH, TYPE_PARSING)
+    data.set_name("Dataset_1")
+    return data
 
 
 def experiment_4():
@@ -44,8 +49,10 @@ def experiment_4():
     PATH = "../Dataset/Lemur_gorilla_mouse.txt"
     TYPE_PARSING = "txt"
 
-    return experiment(PATH,TYPE_PARSING)
+    data =  experiment(PATH,TYPE_PARSING)
+    data.set_name("Lemur_gorilla_mouse")
 
+    return data
 
 
 def experiment_5():
@@ -56,10 +63,12 @@ def experiment_5():
     PATH = "../Dataset/Rat_lemur_opossum.txt"
     TYPE_PARSING = "txt"
 
-    return experiment(PATH,TYPE_PARSING)
+    data = experiment(PATH,TYPE_PARSING)
+    data.set_name("Rat_lemur_opossum")
+    return data
 
 
-def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 5, USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False) :
+def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 3, USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False) :
 
 
     # ----------------------------------------  INIT Environement ---------------------------------------------

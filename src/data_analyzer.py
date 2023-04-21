@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
-
-def plot_time(list_time, stop_to = None):
+import os
+def plot_time(list_time, name,stop_to = None):
 
     if stop_to:
         number_episode = stop_to
@@ -13,10 +13,11 @@ def plot_time(list_time, stop_to = None):
     plt.ylabel("Time to reach episode average (seconde)")
     plt.title("Time evolution")
     plt.plot([*range(number_episode)],list_time)
+    plt.savefig(name + "_time_plot.png")
     plt.show()
 
 
-def plot_best_score(list_score,stop_to = None):
+def plot_best_score(list_score,name, stop_to = None):
     if stop_to:
         number_episode = stop_to
         list_score = list_score[:stop_to]
@@ -28,9 +29,10 @@ def plot_best_score(list_score,stop_to = None):
     plt.ylabel("Best score average")
     plt.title("Best score evolution")
     plt.plot([*range(number_episode)], list_score)
+    plt.savefig(name + "_best_score_plot.png")
     plt.show()
 
-def plot_score(list_score,stop_to = None):
+def plot_score(list_score,name,stop_to = None):
 
     if stop_to:
         number_episode = stop_to
@@ -43,6 +45,7 @@ def plot_score(list_score,stop_to = None):
     plt.ylabel("Score average")
     plt.title("Score evolution")
     plt.plot([*range(number_episode)], list_score)
+    plt.savefig(name + "_score_plot.png")
     plt.show()
 
 
@@ -70,14 +73,18 @@ def get_CS(list_alignement):
     return EM/AL
 
 
-def experiment_analyzer(data,stop_to = 100):
-    score, list_alignement = data.get_result()
+def experiment_analyzer(data,SAVE_TO,stop_to = 100):
+    score, list_alignement = data.get_result(0)
     time_series = data.get_time_average_serie()
     score_average = data.get_score_average_serie()
     best_score_average = data.get_best_score_average_serie()
     AL, EM, CS = get_AL(list_alignement),get_EM(list_alignement),get_CS(list_alignement)
-    print("SCORE : ", score,"\t | AL : ", AL, "\t | EM : ",EM, "\t | CS : ",CS)
-
-    plot_time(time_series,stop_to)
-    plot_score(score_average,stop_to)
-    plot_best_score(best_score_average,stop_to)
+    name = SAVE_TO + data.get_name() + "/" + data.get_name()
+    string_info = "SCORE : " +  str(score) + "\nAL : " \
+                  +  str(AL) + "\nEM : " + str(EM) + "\nCS : " + str(CS)
+    with open(name + '.txt', 'w') as f:
+        f.write(string_info)
+    f.close()
+    plot_time(time_series,name,stop_to)
+    plot_score(score_average,name,stop_to)
+    plot_best_score(best_score_average,name,stop_to)
