@@ -7,7 +7,7 @@ class Data_garbage:
         self.experiment = -1
         self.experiment_info = {}
         self.name = None
-
+        self.dico_info_running = {}
     def set_name(self,new_name):
         self.name = new_name
 
@@ -86,6 +86,29 @@ class Data_garbage:
 
     def __repr__(self):
         return repr(self.experiment_info)
+
+
+    def add_info_experiment(self,GAMMA, ALPHA, EPSILON, NUMBER_TRAINING_EPISODE,
+                            NUMBER_REPITION_EXPERIMENT, USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE):
+        self.dico_info_running["GAMMA"] = GAMMA
+        self.dico_info_running["ALPHA"] = ALPHA
+        self.dico_info_running["EPSILON"] = EPSILON
+        self.dico_info_running["NUMBER_TRAINING_EPISODE"] = NUMBER_TRAINING_EPISODE
+        self.dico_info_running["NUMBER_REPITION_EXPERIMENT"] = NUMBER_REPITION_EXPERIMENT
+        self.dico_info_running["USE_DYNAMIC_AGENT"] = USE_DYNAMIC_AGENT
+        if TREE_CHOICE == 1:
+            TREE_CHOICE = "stupid_tree"
+        elif TREE_CHOICE == 2:
+            TREE_CHOICE = "quick_tree"
+
+        elif TREE_CHOICE == 3:
+            TREE_CHOICE = "article_tree"
+        self.dico_info_running["TREE_CHOICE"] = TREE_CHOICE
+        self.dico_info_running["TRONCATE"] = TRONCATE
+
+    def get_info_experiment(self):
+        return self.dico_info_running
+
 
 class Data_episode:
     def __init__(self,score,best_score_encounter,time):

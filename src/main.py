@@ -9,9 +9,10 @@ def run_all_experimnet(gather_data = True):
     if gather_data and not os.path.isdir(PATH_SAVE_DATA):
         os.mkdir(PATH_SAVE_DATA)
 
-    for i in range(3,6):
+    for i in range(1,6):
         data = eval("experiment_{}()".format(i))
         name_experimnet = data.get_name()
+        print("--"*30,"END experiment ",name_experimnet ,"--"*30)
         if gather_data and not os.path.isdir(PATH_SAVE_DATA + name_experimnet):
             os.mkdir(PATH_SAVE_DATA + name_experimnet)
 

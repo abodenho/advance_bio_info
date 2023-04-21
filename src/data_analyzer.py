@@ -81,9 +81,14 @@ def experiment_analyzer(data,SAVE_TO,stop_to = 100):
     AL, EM, CS = get_AL(list_alignement),get_EM(list_alignement),get_CS(list_alignement)
     name = SAVE_TO + data.get_name() + "/" + data.get_name()
     string_info = "SCORE : " +  str(score) + "\nAL : " \
-                  +  str(AL) + "\nEM : " + str(EM) + "\nCS : " + str(CS)
+                  +  str(AL) + "\nEM : " + str(EM) + "\nCS : " + str(CS) + "\n"
+
+    running_info = data.get_info_experiment()
     with open(name + '.txt', 'w') as f:
         f.write(string_info)
+        for key in running_info:
+            string = key + " : "+str(running_info[key]) + "\n"
+            f.write(string)
     f.close()
     plot_time(time_series,name,stop_to)
     plot_score(score_average,name,stop_to)
