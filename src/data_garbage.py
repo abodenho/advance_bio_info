@@ -6,7 +6,13 @@ class Data_garbage:
     def __init__(self):
         self.experiment = -1
         self.experiment_info = {}
+        self.name = None
 
+    def set_name(self,new_name):
+        self.name = new_name
+
+    def get_name(self):
+        return self.name
 
     def begin_new_experiment(self):
         self.experiment += 1
