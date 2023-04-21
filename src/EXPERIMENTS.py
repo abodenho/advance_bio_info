@@ -80,15 +80,15 @@ def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBE
     NUMBER_STATE  = int((NUMBER_SEQUENCE**(NUMBER_SEQUENCE+1) -1) / (NUMBER_SEQUENCE-1))
     LIST_POSSIBLE_ACTION = [*range(NUMBER_SEQUENCE)]
 
-    if USE_DYNAMIC_AGENT:
-        agent = Dynamic_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
-    else :
-        agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
-
     # ----------------------------------------  RUN experiment ---------------------------------------------
     data_keeper = Data_garbage()
     data_keeper.add_info_experiment(GAMMA, ALPHA, EPSILON, NUMBER_TRAINING_EPISODE,NUMBER_REPITION_EXPERIMENT, USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE)
     for experiment in range(NUMBER_REPITION_EXPERIMENT):
+        if USE_DYNAMIC_AGENT:
+            agent = Dynamic_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
+        else:
+            agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
+
         print("Repetion number ",experiment, "of the experiment")
         data_keeper.begin_new_experiment()
         play_game(environement,agent,NUMBER_TRAINING_EPISODE,data_keeper,TRONCATE,VERBOSE)

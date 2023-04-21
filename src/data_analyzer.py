@@ -108,7 +108,7 @@ def experiment_analyzer(data,SAVE_TO,stop_to = 100):
 def get_best_info(data):
     list_time_best_score = []
     list_episode_best_score = []
-    for expirement in range(data.get_number_experiment()):
+    for expirement in range(data.get_number_experiment()+1):
         best_score_average = data.get_best_score_serie(expirement)
         time_series = data.get_time_serie(expirement)
         best_score = best_score_average[-1]
