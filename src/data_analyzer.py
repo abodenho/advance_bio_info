@@ -89,8 +89,8 @@ def experiment_analyzer(data,SAVE_TO,stop_to = 100):
         string_info = "SCORE : " + str(score) + "\nAL : " \
                       + str(AL) + "\nEM : " + str(EM) + "\nCS : " + str(CS) + "\n"
         f.write(string_info)
-        f.write("Number episode before reach best score : " + str(number_episode_before_reach_best_score))
-        f.write("Time to reach best score : " + str(time_to_reach_best_score))
+        f.write("Number episode before reach best score : " + str(number_episode_before_reach_best_score) + "\n")
+        f.write("Time to reach best score : " + str(time_to_reach_best_score) + "\n")
         for key in running_info:
             string = key + " : "+str(running_info[key]) + "\n"
             f.write(string)
@@ -107,5 +107,6 @@ def get_best_info(time_series,best_score_average):
         if best_score_average[episode] == best_score:
             number_episode_to_reach_best_score = episode + 1 # +1 because we count at 1
             time_to_reach_best_score = time_series[episode]
+            break
 
     return number_episode_to_reach_best_score, time_to_reach_best_score
