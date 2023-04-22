@@ -3,7 +3,7 @@ import random
 
 import numpy as np
 class Agent:
-    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None):
+    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None, epsilon_min = None):
         """
         :param list_action: liste des différents actions (int)
         :param univers: number_state
@@ -18,6 +18,7 @@ class Agent:
         self.alpha = alpha
         self.epsilon = epsilon
         self.decrease_espilon = decrease_espilon
+        self.epsilon_min = epsilon_min
         self.number_action = len(list_action)
         self.q_table = self._create_q_table()
 
@@ -43,8 +44,7 @@ class Agent:
                     action = [i]
                 elif self.q_table[current_state][i] == best_value:
                     action.append(i)
-        if self.decrease_espilon:
-            self.epsilon = self.epsilon * self.decrease_espilon
+
         rep = random.choice(action)
 
         return rep
@@ -58,7 +58,6 @@ class Agent:
             if self.q_table[new_state][i] > best_q:
                 best_q = self.q_table[new_state][i]
         return best_q
-
 
 
 class Classical_q_learning(Agent):
@@ -78,6 +77,12 @@ class Classical_q_learning(Agent):
         else:
             self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
                                                   + self.alpha * (reward + self.gamme * self._maxQ(new_state))
+
+        if done and self.decrease_espilon:
+            if self.epsilon_min:
+                self.epsilon = max(self.epsilon_min,self.epsilon * self.decrease_espilon)
+            else:
+                self.epsilon = self.epsilon * self.decrease_espilon
 
 
 class Dynamic_q_learning(Agent):
@@ -104,6 +109,11 @@ class Dynamic_q_learning(Agent):
         else:
             self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
                                                   + self.alpha * (reward + self.gamme * self._maxQ(new_state))
+        if done and self.decrease_espilon:
+            if self.epsilon_min:
+                self.epsilon = max(self.epsilon_min,self.epsilon * self.decrease_espilon)
+            else:
+                self.epsilon = self.epsilon * self.decrease_espilon
 
     def make_choice(self,state):
         if not state in self.q_table:

@@ -5,7 +5,7 @@ import random
 from needleman_wunsch import *
 from tree import *
 from copy import deepcopy
-INFINITY = math.inf
+INFINITY = float("inf")
 
 class Environement:
 

@@ -17,7 +17,7 @@ def run_all_experimnet(gather_data = True):
     if gather_data and not os.path.isdir(PATH_SAVE_DATA):
         os.mkdir(PATH_SAVE_DATA)
 
-    for i in range(1,6):
+    for i in range(5,6):
         print("--"*30,"Begin experiment :",i)
         data = eval("experiment_{}()".format(i))
         name_experimnet = data.get_name()

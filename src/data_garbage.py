@@ -4,7 +4,7 @@ import numpy as np
 
 class Data_garbage:
     def __init__(self):
-        self.experiment = -1
+        self.last_experiment_saved = None
         self.experiment_info = {}
         self.name = None
         self.dico_info_running = {}
@@ -15,10 +15,13 @@ class Data_garbage:
         return self.name
 
     def begin_new_experiment(self):
-        self.experiment += 1
-        self.experiment_info[self.experiment]= {}
-        self.experiment_info[self.experiment]["training"] = {}
-        self.experiment_info[self.experiment]["result"] = {}
+        if self.last_experiment_saved != None:
+            self.last_experiment_saved += 1
+        else:
+            self.last_experiment_saved = 0
+        self.experiment_info[self.last_experiment_saved]= {}
+        self.experiment_info[self.last_experiment_saved]["training"] = {}
+        self.experiment_info[self.last_experiment_saved]["result"] = {}
 
         self.best_score_encounter = float("-inf")
 
@@ -28,11 +31,11 @@ class Data_garbage:
     def add_data_experiment_training(self, score, episode):
         time_from_begining = time.time() - self.initial_time
         self.best_score_encounter = max(self.best_score_encounter, score)
-        self.experiment_info[self.experiment]["training"][episode] = Data_episode(score,self.best_score_encounter,time_from_begining)
+        self.experiment_info[self.last_experiment_saved]["training"][episode] = Data_episode(score, self.best_score_encounter, time_from_begining)
 
     def add_data_experiment_testing(self,score,alignement):
-        self.experiment_info[self.experiment]["result"]["score"] = score
-        self.experiment_info[self.experiment]["result"]["alignement"] = alignement
+        self.experiment_info[self.last_experiment_saved]["result"]["score"] = score
+        self.experiment_info[self.last_experiment_saved]["result"]["alignement"] = alignement
 
 
     def get_time_serie(self,experiment):
@@ -44,7 +47,7 @@ class Data_garbage:
 
     def get_time_average_serie(self):
         all_experiment_time_result = []
-        for experiment in range(self.experiment):
+        for experiment in range(self.get_number_experiment()):
             all_experiment_time_result.append(self.get_time_serie(experiment))
         return np.mean(all_experiment_time_result,axis=0)
 
@@ -58,7 +61,7 @@ class Data_garbage:
 
     def get_score_average_serie(self):
         all_experiment_score_result = []
-        for experiment in range(self.experiment):
+        for experiment in range(self.get_number_experiment()):
             all_experiment_score_result.append(self.get_score_serie(experiment))
         return np.mean(all_experiment_score_result,axis=0)
 
@@ -71,17 +74,37 @@ class Data_garbage:
 
     def get_best_score_average_serie(self):
         all_experiment_best_score_result = []
-        for experiment in range(self.experiment):
+        for experiment in range(self.get_number_experiment()):
             all_experiment_best_score_result.append(self.get_best_score_serie(experiment))
         return np.mean(all_experiment_best_score_result,axis=0)
 
-    def get_result(self,experiment):
+    def __get_result(self, experiment):
         score = self.experiment_info[experiment]["result"]["score"]
         alignement = self.experiment_info[experiment]["result"]["alignement"]
         return (score,alignement)
 
+    def get_all_result(self):
+        best_alignement = None
+        lowest_score = float("inf")
+        biggest_score = float("-inf")
+        worst_alignement = None
+        list_score = []
+        for i in range(self.get_number_experiment()):
+            score,alignement = self.__get_result(i)
+            list_score.append(score)
+            if score > biggest_score:
+                biggest_score = score
+                best_alignement = alignement
+            if score < lowest_score:
+                lowest_score = score
+                worst_alignement = alignement
+        average_score = np.mean(list_score)
+        std_score = np.std(list_score)
+        return average_score,std_score, lowest_score, biggest_score, best_alignement, worst_alignement
+
+
     def get_number_experiment(self):
-        return self.experiment
+        return self.last_experiment_saved + 1
 
 
     def __repr__(self):
