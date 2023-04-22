@@ -64,8 +64,8 @@ class Classical_q_learning(Agent):
     """
     Classical q learning agent which create q table at the begining
     """
-    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None):
-        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
+    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None, epsilon_min = None):
+        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon, epsilon_min)
 
     def _create_q_table(self):
         return np.zeros((self.univers,self.number_action))
@@ -77,7 +77,6 @@ class Classical_q_learning(Agent):
         else:
             self.q_table[current_state][action] = (1-self.alpha) * self.q_table[current_state][action] \
                                                   + self.alpha * (reward + self.gamme * self._maxQ(new_state))
-
         if done and self.decrease_espilon:
             if self.epsilon_min:
                 self.epsilon = max(self.epsilon_min,self.epsilon * self.decrease_espilon)
@@ -85,12 +84,14 @@ class Classical_q_learning(Agent):
                 self.epsilon = self.epsilon * self.decrease_espilon
 
 
+
+
 class Dynamic_q_learning(Agent):
     """
     Dynamic q learning agent which create q table during the learning process
     """
-    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None):
-        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon)
+    def __init__(self, list_action, univers, gamma, alpha, epsilon, decrease_espilon=None, epsilon_min = None):
+        super().__init__(list_action, univers, gamma, alpha, epsilon, decrease_espilon,epsilon_min)
         self.__add_state(0)
 
     def _create_q_table(self):
@@ -114,6 +115,7 @@ class Dynamic_q_learning(Agent):
                 self.epsilon = max(self.epsilon_min,self.epsilon * self.decrease_espilon)
             else:
                 self.epsilon = self.epsilon * self.decrease_espilon
+
 
     def make_choice(self,state):
         if not state in self.q_table:

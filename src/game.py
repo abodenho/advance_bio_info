@@ -12,11 +12,12 @@ def play_game(environement,agent,NUMBER_EPISODE,data_keeper,stop_to_truncated = 
             choice = agent.make_choice(observation)
             old_obs = observation
             observation, reward, finish, truncated,info = environement.step(choice)
-            agent.learn(old_obs, observation, choice, reward, end)
             if stop_to_truncated:
                 end = finish or truncated
             else:
                 end = finish
+            agent.learn(old_obs, observation, choice, reward, end)
+
 
         data_keeper.add_data_experiment_training(compute_score(info[2]), episode)
 
