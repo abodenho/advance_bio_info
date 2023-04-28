@@ -10,7 +10,7 @@ C   -1  -1   1  -1
 T   -1  -1  -1   1
 """
 
-score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
+score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}
 
 def get_score(): return score
 
@@ -112,7 +112,6 @@ def needleman_wunsch(profile, seq):
     # Align new sequence
     seq = _generator(seq)
     MSA.append(''.join([next(seq) if node[0] else '-' for node in path]))
-
     return MSA
 
 
