@@ -92,11 +92,11 @@ def needleman_wunsch(profile, seq):
     INPUT:
     profile = ['G-CAACA', 
                'GATTACA']
-    seq = 'GCATGACA'
+    seq = 'GCATACA'
     OUTPUT:
     MSA = ['G--CAACA', 
            'G-ATTACA', 
-           'GCATGACA']
+           'GCATACA']
     """
     # Compatibility 2-sequences and n-sequences
     if isinstance(profile, str):
@@ -112,6 +112,7 @@ def needleman_wunsch(profile, seq):
     # Align new sequence
     seq = _generator(seq)
     MSA.append(''.join([next(seq) if node[0] else '-' for node in path]))
+    print(MSA)
     return MSA
 
 
@@ -119,7 +120,7 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         seq1 = "GCAACA"
         seq2 = "GATTACA"
-        seq3 = "GCATGACA"
+        seq3 = "GCATACA"
         MSA = needleman_wunsch(seq1, seq2)
         MSA = needleman_wunsch(MSA, seq3)
     elif len(sys.argv) >= 3:
