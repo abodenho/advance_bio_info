@@ -112,7 +112,7 @@ def needleman_wunsch(profile, seq):
     # Align new sequence
     seq = _generator(seq)
     MSA.append(''.join([next(seq) if node[0] else '-' for node in path]))
-    print(MSA)
+
     return MSA
 
 
