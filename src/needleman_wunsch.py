@@ -90,15 +90,13 @@ def needleman_wunsch(profile, seq):
     EXAMPLE with "score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}"
 
     INPUT:
-    profile = ['GCATGCG',
+    profile = ['G-CAACA', 
                'GATTACA']
     seq = 'GCATGACA'
-
     OUTPUT:
-    MSA = ['GCAT-GCG',
-           'GATT-ACA',
+    MSA = ['G--CAACA', 
+           'G-ATTACA', 
            'GCATGACA']
-
     """
     # Compatibility 2-sequences and n-sequences
     if isinstance(profile, str):
@@ -120,11 +118,11 @@ def needleman_wunsch(profile, seq):
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
-        seq1 = "GCATGCG"
+        seq1 = "GCAACA"
         seq2 = "GATTACA"
         seq3 = "GCATGACA"
-        MSA = needleman_wunsch(seq3, seq2)
-        MSA = needleman_wunsch(MSA, seq1)
+        MSA = needleman_wunsch(seq1, seq2)
+        MSA = needleman_wunsch(MSA, seq3)
     elif len(sys.argv) >= 3:
         needleman_wunsch(sys.argv)
     elif sys.argv[1] == "test":
