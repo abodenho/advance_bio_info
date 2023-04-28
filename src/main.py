@@ -28,4 +28,7 @@ def run_all_experimnet(gather_data = True):
         experiment_analyzer(data,PATH_SAVE_DATA,stop_to)
 
 if __name__ == "__main__":
+    if os.getcwd().split('/')[-1] == "advance_bio_info": # When running on VSCode instead of Pycharm
+        os.chdir("src")
+
     run_all_experimnet()
