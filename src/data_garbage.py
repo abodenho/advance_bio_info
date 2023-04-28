@@ -33,9 +33,10 @@ class Data_garbage:
         self.best_score_encounter = max(self.best_score_encounter, score)
         self.experiment_info[self.last_experiment_saved]["training"][episode] = Data_episode(score, self.best_score_encounter, time_from_begining)
 
-    def add_data_experiment_testing(self,score,alignement):
+    def add_data_experiment_testing(self,score,alignement,list_action):
         self.experiment_info[self.last_experiment_saved]["result"]["score"] = score
         self.experiment_info[self.last_experiment_saved]["result"]["alignement"] = alignement
+        self.experiment_info[self.last_experiment_saved]["result"]["list_action"] = list_action
 
 
     def get_time_serie(self,experiment):
@@ -81,7 +82,8 @@ class Data_garbage:
     def __get_result(self, experiment):
         score = self.experiment_info[experiment]["result"]["score"]
         alignement = self.experiment_info[experiment]["result"]["alignement"]
-        return (score,alignement)
+        action_list = self.experiment_info[experiment]["result"]["list_action"]
+        return (score,alignement,action_list)
 
     def get_all_result(self):
         best_alignement = None
@@ -89,18 +91,22 @@ class Data_garbage:
         biggest_score = float("-inf")
         worst_alignement = None
         list_score = []
+        action_list_best = None
+        action_list_worst = None
         for i in range(self.get_number_experiment()):
-            score,alignement = self.__get_result(i)
+            score,alignement,action_list = self.__get_result(i)
             list_score.append(score)
             if score > biggest_score:
                 biggest_score = score
                 best_alignement = alignement
+                action_list_best = action_list
             if score < lowest_score:
                 lowest_score = score
                 worst_alignement = alignement
+                action_list_worst = action_list
         average_score = np.mean(list_score)
         std_score = np.std(list_score)
-        return average_score,std_score, lowest_score, biggest_score, best_alignement, worst_alignement
+        return average_score,std_score, lowest_score, biggest_score, best_alignement, worst_alignement, action_list_best, action_list_worst
 
 
     def get_number_experiment(self):

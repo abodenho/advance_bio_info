@@ -79,7 +79,7 @@ def get_CS(list_alignement):
 def title(string):
     return "-"*10 + string + "-"*10 + "\n \n"
 def experiment_analyzer(data,SAVE_TO,stop_to):
-    average_score,std_score, lowest_score, biggest_score, best_alignement, worst_alignement = data.get_all_result()
+    average_score,std_score, lowest_score, biggest_score, best_alignement, worst_alignement,action_list_best, action_list_worst = data.get_all_result()
     time_series = data.get_time_average_serie()
     score_average = data.get_score_average_serie()
     best_score_average = data.get_best_score_average_serie()
@@ -117,11 +117,11 @@ def experiment_analyzer(data,SAVE_TO,stop_to):
         f.write("\n")
 
         f.write(title("Alignement"))
-        f.write("BEST ENCOUNTER \n ")
+        f.write("BEST ENCOUNTER : {}\n".format(str(action_list_best)))
         for alignement in best_alignement:
             f.write("\t " + str(alignement) + "\n")
         f.write("\n \n \n")
-        f.write("Worst ENCOUNTER \n ")
+        f.write("Worst ENCOUNTER : {} \n ".format(str(action_list_worst)))
         for alignement in worst_alignement:
             f.write("\t " + str(alignement) + "\n")
 

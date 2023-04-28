@@ -31,8 +31,7 @@ def play_game(environement,agent,NUMBER_EPISODE,data_keeper,stop_to_truncated = 
             end = finish or truncated
         else:
             end = finish
-
-    data_keeper.add_data_experiment_testing(compute_score(info[2]), info[2])
+    data_keeper.add_data_experiment_testing(compute_score(info[2]), info[2],info[0])
 
     if VERBOSE:
         print("SCORE : ", compute_score(info[2]), "\t | Choice list : ",info[0])
