@@ -10,7 +10,21 @@ C   -1  -1   1  -1
 T   -1  -1  -1   1
 """
 
-score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}
+# MODE 0 = Vanilla                              :    {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
+# MODE 1 = Extend gap                           :    {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}
+# MODE 2 = Different scoring                    :    {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
+# MODE 3 = Different equality (Diagonal last)
+
+score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
+
+def _set_score(MODE):
+    global score
+    if MODE==1:
+        score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}
+    elif MODE==2:
+        score = {'match': 3, 'mismatch': -1, 'gap':-2, 'extend':-2} # try something else ?
+    else:
+        score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
 
 def get_score(): return score
 
@@ -19,49 +33,65 @@ def _generator(string):
         yield s
 
 def _aligned_score(aligned_char, char):
-    return sum([score['match'] if c==char else score['mismatch'] for c in aligned_char])
+    return sum([score['match'] if c==char else 0 if (c=='-' or char=='-') else score['mismatch'] for c in aligned_char]) # mismatch with gap is just no match (+0)
 
 
-def _compute_matrix(aligned_seqs, new_seq):
+def _compute_matrix(aligned_seqs, new_seq, MODE):
     """
     Compute Needleman-Wunsch matrix
     """
     # Init score matrix (cumulative gap penality for first row and column, else 0)
-    matrix = [[(a+b)*score['extend'] if a==0 or b==0 else 0 for b in range(1+len(new_seq))] for a in range(1+len(aligned_seqs[0]))]
+    matrix = [[(a+len(aligned_seqs)*b)*score['extend'] if a==0 or b==0 else 0 for b in range(1+len(new_seq))] for a in range(1+len(aligned_seqs[0]))]
     # Init direction matrix to keep track of the best direction
     directions = [[(0,0) for b in range(1+len(new_seq))] for a in range(1+len(aligned_seqs[0]))]
 
     # Fill the matrices
     for i, aligned_char in enumerate(zip(*aligned_seqs)):
         for j, char in enumerate(new_seq):
+            # (0,-1) = TOP
+            from_top =  matrix[i][j+1] + (score['extend'] if directions[i][j+1]==(0,-1) else score['gap']) # gap in only new seq
+            # (-1,0) = LEFT
+            from_left = matrix[i+1][j] + len(aligned_char)*(score['extend'] if directions[i+1][j]==(-1,0) else score['gap']) # gap in profile (n seqs)
             # (-1,-1) = TOP_LEFT
             from_top_left = matrix[i][j] + _aligned_score(aligned_char, char)
-            # (0,-1) = TOP
-            from_top =  matrix[i][j+1] + (score['extend'] if directions[i][j+1]==(0,-1) else score['gap'])
-            # (-1,0) = LEFT
-            from_left = matrix[i+1][j] + (score['extend'] if directions[i+1][j]==(-1,0) else score['gap'])
+
 
             # Keep track of best direction
-            if from_top_left >= from_top and from_top_left >= from_left:
-                matrix[i+1][j+1] = from_top_left
-                directions[i+1][j+1] = (-1,-1)
-            elif from_top >= from_top_left and from_top >= from_left:
-                matrix[i+1][j+1] = from_top
-                directions[i+1][j+1] = (0,-1)
-            elif from_left >= from_top_left and from_left >= from_top:
-                matrix[i+1][j+1] = from_left
-                directions[i+1][j+1] = (-1,0)
-            else:
-                print("ERROR")
-                sys.exit()
+            if MODE == 3: # DIAGONAL LAST
+                if from_top >= from_top_left and from_top >= from_left:
+                    matrix[i+1][j+1] = from_top
+                    directions[i+1][j+1] = (0,-1)
+                elif from_left >= from_top_left and from_left >= from_top:
+                    matrix[i+1][j+1] = from_left
+                    directions[i+1][j+1] = (-1,0)
+                elif from_top_left >= from_top and from_top_left >= from_left: # Diagonal last case (to avoid cutting big gap in gap alternances)
+                    matrix[i+1][j+1] = from_top_left
+                    directions[i+1][j+1] = (-1,-1)
+                else:
+                    print("ERROR")
+                    sys.exit()
+            else: # DIAGONAL FIRST
+                if from_top_left >= from_top and from_top_left >= from_left: # Diagonal first case
+                    matrix[i+1][j+1] = from_top_left
+                    directions[i+1][j+1] = (-1,-1)
+                elif from_left >= from_top_left and from_left >= from_top:
+                    matrix[i+1][j+1] = from_left
+                    directions[i+1][j+1] = (-1,0)
+                elif from_top >= from_top_left and from_top >= from_left:
+                    matrix[i+1][j+1] = from_top
+                    directions[i+1][j+1] = (0,-1)
+                else:
+                    print("ERROR")
+                    sys.exit()
 
+    print(np.array(matrix))
     return directions
 
-def _find_path(aligned_seqs, new_seq):
+def _find_path(aligned_seqs, new_seq, MODE):
     """
     Find alignement (best path in Needleman-Wunsch)
     """
-    directions = _compute_matrix(aligned_seqs, new_seq)
+    directions = _compute_matrix(aligned_seqs, new_seq, MODE)
     i = len(directions[0])-1
     j = len(directions)-1
     path = []
@@ -85,24 +115,25 @@ def compute_score(seqs): # TODO optimize with memoisation
                 rep += score['mismatch']
     return rep
 
-def needleman_wunsch(profile, seq):
+def needleman_wunsch(profile, seq, *, version=0):
     """
     EXAMPLE with "score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}"
 
     INPUT:
     profile = ['G-CAACA', 
                'GATTACA']
-    seq = 'GCATACA'
+    seq = 'GATACAT'
     OUTPUT:
-    MSA = ['G--CAACA', 
-           'G-ATTACA', 
-           'GCATACA']
+    MSA = ['G-CAACA-', 
+           'GATTACA-', 
+           'GA-TACAT']
     """
+    _set_score(version)
     # Compatibility 2-sequences and n-sequences
     if isinstance(profile, str):
         profile = [profile]
     # Compute Path
-    path = _find_path(profile, seq)
+    path = _find_path(profile, seq, version)
 
     # Align profile
     MSA = []
@@ -118,11 +149,14 @@ def needleman_wunsch(profile, seq):
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
+        v = 0
         seq1 = "GCAACA"
         seq2 = "GATTACA"
-        seq3 = "GCATACA"
-        MSA = needleman_wunsch(seq1, seq2)
-        MSA = needleman_wunsch(MSA, seq3)
+        seq3 = "GATACAT"
+        MSA = needleman_wunsch(seq1, seq2, version=v)
+        print(MSA)
+        MSA = needleman_wunsch(MSA, seq3, version=v)
+        print(MSA)
     elif len(sys.argv) >= 3:
         needleman_wunsch(sys.argv)
     elif sys.argv[1] == "test":
