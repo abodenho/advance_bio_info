@@ -12,7 +12,7 @@ T   -1  -1  -1   1
 
 # MODE 0 = Vanilla                              :    {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
 # MODE 1 = Extend gap                           :    {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-1}
-# MODE 2 = Different scoring                    :    {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
+# MODE 2 = Different scoring                    :    {'match': 3, 'mismatch': -1, 'gap':-2, 'extend':-2}
 # MODE 3 = Different equality (Diagonal last)
 
 score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
