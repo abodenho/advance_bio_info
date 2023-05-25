@@ -34,7 +34,9 @@ def get_experiment_values(test_number):
     ESPILON_MIN = None
     NW_MODE = 0
     if test_number == test_class.EPSILON_DECAY_Q:
-        pass
+        EPSILON = 1
+        ESPILON_DECAY = 0.95
+        ESPILON_MIN = 0.01
 
     elif test_number == test_class.WITHOUT_TRUNCATURE_Q:
         TRONCATE = False
