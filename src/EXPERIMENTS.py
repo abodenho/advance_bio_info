@@ -3,7 +3,7 @@ from game import play_game
 from environement import Environement
 from data_garbage import Data_garbage
 
-def experiment_1():
+def experiment_1(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 1 : Hepatite C
     """
@@ -11,12 +11,13 @@ def experiment_1():
     PATH = "../Dataset/Hepatitis_C"
     TYPE_PARSING = "fasta"
 
-    data =  experiment(PATH,TYPE_PARSING, USE_DYNAMIC_AGENT=True,VERBOSE=True)
-    data.set_name_experiment("Hepatitis_C")
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+                      TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
 
+    data.set_name_experiment("Hepatitis_C")
     return data
 
-def experiment_2():
+def experiment_2(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 2 : Papio Anubis
     """
@@ -24,11 +25,13 @@ def experiment_2():
     PATH = "../Dataset/Papio_Anubis"
     TYPE_PARSING = "fasta"
 
-    data =  experiment(PATH,TYPE_PARSING,VERBOSE=True)
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+                      TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
+
     data.set_name_experiment("Papio_Anubis")
     return data
 
-def experiment_3():
+def experiment_3(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 3 Dataset 1
     """
@@ -36,12 +39,15 @@ def experiment_3():
     PATH = "../Dataset/Dataset_1.txt"
     TYPE_PARSING = "txt"
 
-    data =  experiment(PATH, TYPE_PARSING)
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+                      TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
+
+
     data.set_name_experiment("Dataset_1")
     return data
 
 
-def experiment_4():
+def experiment_4(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 4 : Lemur gorilla mouse
     """
@@ -49,13 +55,15 @@ def experiment_4():
     PATH = "../Dataset/Lemur_gorilla_mouse.txt"
     TYPE_PARSING = "txt"
 
-    data =  experiment(PATH,TYPE_PARSING)
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+                      TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
+
     data.set_name_experiment("Lemur_gorilla_mouse")
 
     return data
 
 
-def experiment_5():
+def experiment_5(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 5 : Rat lemur opossum
     """
@@ -63,17 +71,14 @@ def experiment_5():
     PATH = "../Dataset/Rat_lemur_opossum.txt"
     TYPE_PARSING = "txt"
 
-    #PARAMETER TO PLAY WITH
-
-
-    #SAVING DATA
-    data = experiment(PATH,TYPE_PARSING)
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+                      TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
     data.set_name_experiment("Rat_lemur_opossum")
 
     return data
 
 
-def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 5,
+def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 25,
                USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False, ESPILON_DECAY = None , ESPILON_MIN = None, NW_MODE = 0) :
 
 
