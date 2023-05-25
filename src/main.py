@@ -29,7 +29,7 @@ class test_class(Enum):
 
 def get_experiment_values(test_number):
     TRONCATE = True
-    EPSILON = 0.8
+    EPSILON = 0.2
     ESPILON_DECAY = None
     ESPILON_MIN = None
     NW_MODE = 0
