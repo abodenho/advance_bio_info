@@ -2,7 +2,7 @@ from EXPERIMENTS import *
 from data_analyzer import *
 import os
 from plotting import plot_all
-
+from enum import Enum
 
 PATH_SAVE_DATA = "../data_experiment/"
 
@@ -15,19 +15,50 @@ STOP_TO = { # COPY of article information
 }
 
 
+class test_class(Enum):
+    VANILLA = 0
+    BRUTE_FORCE = -1
+    EPSILON_DECAY_Q = 1
+    WITHOUT_TRUNCATURE_Q = 2
+    EXTEND_GAP_MSA = 3
+    DIFFENT_VALUE_MSA = 4
+    PRIORITY_ORDER_MSA = 5
 
-def run_all_experimnet(gather_data = True):
+
+
+
+def get_experiment_values(test_number):
+    TRONCATE = True
+    EPSILON = 0.8
+    ESPILON_DECAY = None
+    ESPILON_MIN = None
+    NW_MODE = 0
+    if test_number == test_class.EPSILON_DECAY_Q:
+        pass
+
+    elif test_number == test_class.WITHOUT_TRUNCATURE_Q:
+        TRONCATE = False
+
+    elif test_number == test_class.EXTEND_GAP_MSA:
+        NW_MODE = 1
+
+    elif test_number == test_class.DIFFENT_VALUE_MSA:
+        NW_MODE = 2
+
+    elif test_number == test_class.PRIORITY_ORDER_MSA:
+        NW_MODE = 3
+
+    return TRONCATE, EPSILON, ESPILON_DECAY, ESPILON_MIN, NW_MODE
+
+
+def run_all_experimnet(gather_data = True,test_number = test_class.VANILLA):
 
     if gather_data and not os.path.isdir(PATH_SAVE_DATA):
         os.mkdir(PATH_SAVE_DATA)
 
     #PARAMETER TO PLAY WITH
 
-    TRONCATE = True
-    EPSILON = 0.8
-    ESPILON_DECAY = None
-    ESPILON_MIN = None
-    NW_MODE = 0
+    TRONCATE, EPSILON, ESPILON_DECAY, ESPILON_MIN, NW_MODE = get_experiment_values(test_number)
 
     for i in range(1,6):
         print("--"*30,"Begin experiment :",i)
