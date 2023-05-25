@@ -1,5 +1,6 @@
 import time
 import numpy as np
+import pickle
 
 
 class Data_garbage:
@@ -8,11 +9,24 @@ class Data_garbage:
         self.experiment_info = {}
         self.name = None
         self.dico_info_running = {}
-    def set_name(self,new_name):
+    def set_name_experiment(self, new_name):
         self.name = new_name
 
     def get_name(self):
-        return self.name
+        GAMMA = str(self.dico_info_running["GAMMA"])
+        ALPHA = str(self.dico_info_running["ALPHA"])
+        EPSILON = str(self.dico_info_running["EPSILON"])
+        USE_DYNAMIC_AGENT = str(self.dico_info_running["USE_DYNAMIC_AGENT"])
+        TRONCATE = str(self.dico_info_running["TRONCATE"])
+        MODE_NW = str(self.dico_info_running["MODE_NW"])
+        EPSILON_DECAY = str(self.dico_info_running["EPSILON_DECAY"])
+        EPSILON_MIN =  str(self.dico_info_running["EPSILON_MIN"])
+
+        name = self.name + "_GAMMA_" + GAMMA + "_ALPHA_" + ALPHA + "_EPSILON_" \
+               + EPSILON + "_USE_DYNAMIC_AGENT_" + USE_DYNAMIC_AGENT + "_TRONCATE_" + TRONCATE + "_MODE_NW_" + MODE_NW \
+               + "_EPSILON_DECAY_" + EPSILON_DECAY + "_EPSILON_MIN_" + EPSILON_MIN
+
+        return name
 
     def begin_new_experiment(self):
         if self.last_experiment_saved != None:
@@ -118,7 +132,7 @@ class Data_garbage:
 
 
     def add_info_experiment(self,GAMMA, ALPHA, EPSILON, NUMBER_TRAINING_EPISODE,
-                            NUMBER_REPITION_EXPERIMENT, USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE):
+                            NUMBER_REPITION_EXPERIMENT, USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE,EPSILON_DECAY,EPSILON_MIN,MODE_NW):
         self.dico_info_running["GAMMA"] = GAMMA
         self.dico_info_running["ALPHA"] = ALPHA
         self.dico_info_running["EPSILON"] = EPSILON
@@ -134,6 +148,10 @@ class Data_garbage:
             TREE_CHOICE = "article_tree"
         self.dico_info_running["TREE_CHOICE"] = TREE_CHOICE
         self.dico_info_running["TRONCATE"] = TRONCATE
+        self.dico_info_running["EPSILON_DECAY"] = EPSILON_DECAY
+        self.dico_info_running["EPSILON_MIN"] = EPSILON_MIN
+        self.dico_info_running["MODE_NW"] = MODE_NW
+
 
     def get_info_experiment(self):
         return self.dico_info_running

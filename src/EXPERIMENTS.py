@@ -12,7 +12,7 @@ def experiment_1():
     TYPE_PARSING = "fasta"
 
     data =  experiment(PATH,TYPE_PARSING, USE_DYNAMIC_AGENT=True,VERBOSE=True)
-    data.set_name("Hepatitis_C")
+    data.set_name_experiment("Hepatitis_C")
 
     return data
 
@@ -25,7 +25,7 @@ def experiment_2():
     TYPE_PARSING = "fasta"
 
     data =  experiment(PATH,TYPE_PARSING,VERBOSE=True)
-    data.set_name("Papio_Anubis")
+    data.set_name_experiment("Papio_Anubis")
     return data
 
 def experiment_3():
@@ -37,7 +37,7 @@ def experiment_3():
     TYPE_PARSING = "txt"
 
     data =  experiment(PATH, TYPE_PARSING)
-    data.set_name("Dataset_1")
+    data.set_name_experiment("Dataset_1")
     return data
 
 
@@ -50,7 +50,7 @@ def experiment_4():
     TYPE_PARSING = "txt"
 
     data =  experiment(PATH,TYPE_PARSING)
-    data.set_name("Lemur_gorilla_mouse")
+    data.set_name_experiment("Lemur_gorilla_mouse")
 
     return data
 
@@ -64,15 +64,16 @@ def experiment_5():
     TYPE_PARSING = "txt"
 
     data = experiment(PATH,TYPE_PARSING)
-    data.set_name("Rat_lemur_opossum")
+    data.set_name_experiment("Rat_lemur_opossum")
     return data
 
 
-def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 5, USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False) :
+def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 5,
+               USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False, ESPILON_DECAY = None , ESPILON_MIN = None, NW_MODE = 0) :
 
 
     # ----------------------------------------  INIT Environement ---------------------------------------------
-    environement = Environement(PATH,TYPE_PARSING,TREE_CHOICE)
+    environement = Environement(PATH,TYPE_PARSING,TREE_CHOICE,NW_MODE)
 
     # ----------------------------------------  INIT AGENT ---------------------------------------------
 
@@ -82,12 +83,14 @@ def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMB
 
     # ----------------------------------------  RUN experiment ---------------------------------------------
     data_keeper = Data_garbage()
-    data_keeper.add_info_experiment(GAMMA, ALPHA, EPSILON, NUMBER_TRAINING_EPISODE,NUMBER_REPITION_EXPERIMENT, USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE)
+    data_keeper.add_info_experiment(GAMMA, ALPHA, EPSILON, NUMBER_TRAINING_EPISODE,NUMBER_REPITION_EXPERIMENT,
+                                    USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE,ESPILON_DECAY,ESPILON_MIN,NW_MODE)
     for experiment in range(NUMBER_REPITION_EXPERIMENT):
+
         if USE_DYNAMIC_AGENT:
-            agent = Dynamic_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
+            agent = Dynamic_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON,ESPILON_DECAY,ESPILON_MIN)
         else:
-            agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON)
+            agent = Classical_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON,ESPILON_DECAY,ESPILON_MIN)
 
         print("Repetion ",experiment)
         data_keeper.begin_new_experiment()
