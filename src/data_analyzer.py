@@ -1,57 +1,4 @@
-import matplotlib.pyplot as plt
-import os
-
 import numpy as np
-
-
-def plot_time(list_time, name,stop_to):
-
-    if stop_to:
-        number_episode = stop_to
-        list_time = list_time[:stop_to]
-    else:
-        number_episode = len(list_time)
-
-    plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Time to reach episode average (seconde)")
-    plt.title("Time evolution")
-    plt.plot([*range(number_episode)],list_time)
-    plt.savefig(name + "_time_plot.png")
-    plt.show()
-
-
-def plot_best_score(list_score,name, stop_to):
-    if stop_to:
-        number_episode = stop_to
-        list_score = list_score[:stop_to]
-    else:
-        number_episode = len(list_score)
-
-    plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Best score average")
-    plt.title("Best score evolution")
-    plt.plot([*range(number_episode)], list_score)
-    plt.savefig(name + "_best_score_plot.png")
-    plt.show()
-
-def plot_score(list_score,name,stop_to):
-
-    if stop_to:
-        number_episode = stop_to
-        list_score = list_score[:stop_to]
-    else:
-        number_episode = len(list_score)
-
-    plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Score average")
-    plt.title("Score evolution")
-    plt.plot([*range(number_episode)], list_score)
-    plt.savefig(name + "_score_plot.png")
-    plt.show()
-
 
 def get_AL(list_alignement):
     return len(list_alignement[0])
@@ -78,15 +25,12 @@ def get_CS(list_alignement):
 
 def title(string):
     return "-"*10 + string + "-"*10 + "\n \n"
-def experiment_analyzer(data,SAVE_TO,stop_to):
+def experiment_analyzer(data,SAVE_TO):
     average_score,std_score, lowest_score, biggest_score, best_alignement, worst_alignement,action_list_best, action_list_worst = data.get_all_result()
-    time_series = data.get_time_average_serie()
-    score_average = data.get_score_average_serie()
-    best_score_average = data.get_best_score_average_serie()
     best_AL, best_EM, best_CS = get_AL(best_alignement),get_EM(best_alignement),get_CS(best_alignement)
     words_AL, words_EM, words_CS = get_AL(worst_alignement),get_EM(worst_alignement),get_CS(worst_alignement)
 
-    name = SAVE_TO + data.get_name() + "_" + data.get_parameter_experiment() + "/" + data.get_name()
+    name = SAVE_TO + data.get_name() + "_" + data.get_parameter_experiment_text() + "/" + data.get_name()
 
 
     running_info = data.get_info_experiment()
@@ -127,11 +71,6 @@ def experiment_analyzer(data,SAVE_TO,stop_to):
 
     f.close()
 
-
-    ## PLOT CREATION
-    #plot_time(time_series,name,stop_to)
-    #plot_score(score_average,name,stop_to)
-    #plot_best_score(best_score_average,name,stop_to)
 
 def get_best_info(data):
     list_time_best_score = []

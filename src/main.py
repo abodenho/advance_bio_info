@@ -1,7 +1,7 @@
 from EXPERIMENTS import *
 from data_analyzer import *
 import os
-
+from plotting import plot_all
 
 
 PATH_SAVE_DATA = "../data_experiment/"
@@ -25,13 +25,18 @@ def run_all_experimnet(gather_data = True):
         print("--"*30,"Begin experiment :",i)
         data = eval("experiment_{}()".format(i))
         name_experimnet = data.get_name()
-        experiment_info = data.get_parameter_experiment()
+        experiment_info = data.get_parameter_experiment_text()
+        path_experiment = PATH_SAVE_DATA + name_experimnet + "_" + experiment_info
+
         print("END experiment ",name_experimnet ,"--"*30)
-        if gather_data and not os.path.isdir(PATH_SAVE_DATA + name_experimnet + "_" + experiment_info):
-            os.mkdir(PATH_SAVE_DATA + name_experimnet + "_" + experiment_info)
-        stop_to = STOP_TO[i]
-        experiment_analyzer(data,PATH_SAVE_DATA,stop_to)
+        if gather_data and not os.path.isdir(path_experiment):
+            os.mkdir(path_experiment)
+        experiment_analyzer(data,PATH_SAVE_DATA)
         data.save(PATH_SAVE_DATA)
+
+        stop_to = STOP_TO[i]
+        plot_all(path_experiment,stop_to)
+
 
 
 if __name__ == "__main__":

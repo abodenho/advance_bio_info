@@ -14,7 +14,7 @@ class Data_garbage:
 
     def get_name(self):
         return  self.name
-    def get_parameter_experiment(self):
+    def get_parameter_experiment_text(self):
         GAMMA = str(self.dico_info_running["GAMMA"])
         ALPHA = str(self.dico_info_running["ALPHA"])
         EPSILON = str(self.dico_info_running["EPSILON"])
@@ -30,6 +30,19 @@ class Data_garbage:
 
         return name
 
+    def get_parameter_experiment(self):
+        GAMMA = self.dico_info_running["GAMMA"]
+        ALPHA = self.dico_info_running["ALPHA"]
+        EPSILON = self.dico_info_running["EPSILON"]
+        USE_DYNAMIC_AGENT = self.dico_info_running["USE_DYNAMIC_AGENT"]
+        TRONCATE = self.dico_info_running["TRONCATE"]
+        MODE_NW = self.dico_info_running["MODE_NW"]
+        EPSILON_DECAY = self.dico_info_running["EPSILON_DECAY"]
+        EPSILON_MIN =  self.dico_info_running["EPSILON_MIN"]
+
+
+
+        return (GAMMA,ALPHA,EPSILON,USE_DYNAMIC_AGENT,TRONCATE,MODE_NW,EPSILON_DECAY,EPSILON_MIN)
     def begin_new_experiment(self):
         if self.last_experiment_saved != None:
             self.last_experiment_saved += 1
@@ -159,10 +172,26 @@ class Data_garbage:
         return self.dico_info_running
 
     def save(self,SAVE_TO):
-        name = SAVE_TO + self.get_name() + "_" +  self.get_parameter_experiment() + "/" + self.get_name() + ".pkl"
-
+        name = SAVE_TO + self.get_name() + "_" + self.get_parameter_experiment_text() + "/" + self.get_name() +"_dico_info_running" + ".pkl"
         with open(name, 'wb') as fp:
-            pickle.dump("data", fp)
+            pickle.dump(self.dico_info_running, fp)
+
+
+        name = SAVE_TO + self.get_name() + "_" + self.get_parameter_experiment_text() + "/" + self.get_name() +"_experiment_info" + ".pkl"
+        with open(name, 'wb') as fp:
+            pickle.dump(self.experiment_info, fp)
+
+    def load_data(self,path_load_data,name_experiment):
+        path = path_load_data + "/" + name_experiment + "_dico_info_running" + ".pkl"
+        with open(path, 'rb') as fp:
+            self.dico_info_running = pickle.load(fp)
+
+        path = path_load_data + "/" + name_experiment + "_experiment_info" + ".pkl"
+        with open(path, 'rb') as fp:
+            self.experiment_info = pickle.load(fp)
+
+        self.last_experiment_saved = len(self.experiment_info) - 1
+        self.name = name_experiment
 
 
 class Data_episode:
