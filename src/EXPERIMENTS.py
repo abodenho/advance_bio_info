@@ -3,7 +3,7 @@ from game import play_game
 from environement import Environement
 from data_garbage import Data_garbage
 
-def experiment_1(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
+def experiment_1(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 1 : Hepatite C
     """
@@ -11,13 +11,13 @@ def experiment_1(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     PATH = "../Dataset/Hepatitis_C"
     TYPE_PARSING = "fasta"
 
-    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,
                       TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
 
     data.set_name_experiment("Hepatitis_C")
     return data
 
-def experiment_2(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
+def experiment_2(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 2 : Papio Anubis
     """
@@ -25,13 +25,13 @@ def experiment_2(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     PATH = "../Dataset/Papio_Anubis"
     TYPE_PARSING = "fasta"
 
-    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,
                       TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
 
     data.set_name_experiment("Papio_Anubis")
     return data
 
-def experiment_3(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
+def experiment_3(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 3 Dataset 1
     """
@@ -39,7 +39,7 @@ def experiment_3(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     PATH = "../Dataset/Dataset_1.txt"
     TYPE_PARSING = "txt"
 
-    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,
                       TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
 
 
@@ -47,7 +47,7 @@ def experiment_3(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     return data
 
 
-def experiment_4(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
+def experiment_4(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 4 : Lemur gorilla mouse
     """
@@ -55,7 +55,7 @@ def experiment_4(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     PATH = "../Dataset/Lemur_gorilla_mouse.txt"
     TYPE_PARSING = "txt"
 
-    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,
                       TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
 
     data.set_name_experiment("Lemur_gorilla_mouse")
@@ -63,7 +63,7 @@ def experiment_4(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     return data
 
 
-def experiment_5(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
+def experiment_5(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     """
     Experiment 5 : Rat lemur opossum
     """
@@ -71,7 +71,7 @@ def experiment_5(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
     PATH = "../Dataset/Rat_lemur_opossum.txt"
     TYPE_PARSING = "txt"
 
-    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,USE_DYNAMIC_AGENT=USE_DYNAMIC_AGENT,
+    data = experiment(PATH,TYPE_PARSING,EPSILON=EPSILON,
                       TRONCATE= TRONCATE,ESPILON_DECAY=ESPILON_DECAY, ESPILON_MIN=ESPILON_MIN,NW_MODE=NW_MODE)
     data.set_name_experiment("Rat_lemur_opossum")
 
@@ -79,7 +79,7 @@ def experiment_5(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW
 
 
 def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 25,
-               USE_DYNAMIC_AGENT = False, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False, ESPILON_DECAY = None , ESPILON_MIN = None, NW_MODE = 0) :
+               USE_DYNAMIC_AGENT = True, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False, ESPILON_DECAY = None , ESPILON_MIN = None, NW_MODE = 0) :
 
 
     # ----------------------------------------  INIT Environement ---------------------------------------------

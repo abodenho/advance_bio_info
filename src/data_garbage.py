@@ -24,8 +24,7 @@ class Data_garbage:
         EPSILON_DECAY = str(self.dico_info_running["EPSILON_DECAY"])
         EPSILON_MIN =  str(self.dico_info_running["EPSILON_MIN"])
 
-        name = "_GAMMA_" + GAMMA + "_ALPHA_" + ALPHA + "_EPSILON_" \
-               + EPSILON + "_USE_DYNAMIC_AGENT_" + USE_DYNAMIC_AGENT + "_TRONCATE_" + TRONCATE + "_MODE_NW_" + MODE_NW \
+        name = "_EPSILON_" + EPSILON +  "_TRONCATE_" + TRONCATE + "_MODE_NW_" + MODE_NW \
                + "_EPSILON_DECAY_" + EPSILON_DECAY + "_EPSILON_MIN_" + EPSILON_MIN
 
         return name
@@ -186,7 +185,7 @@ class Data_garbage:
         with open(path, 'rb') as fp:
             self.dico_info_running = pickle.load(fp)
 
-        path = path_load_data + "/" + name_experiment + "_experiment_info" + ".pkl"
+        path = path_load_data  + "/" + name_experiment + "_experiment_info" + ".pkl"
         with open(path, 'rb') as fp:
             self.experiment_info = pickle.load(fp)
 

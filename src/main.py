@@ -23,16 +23,15 @@ def run_all_experimnet(gather_data = True):
 
     #PARAMETER TO PLAY WITH
 
-    USE_DYNAMIC_AGENT = True
     TRONCATE = True
     EPSILON = 0.8
     ESPILON_DECAY = None
     ESPILON_MIN = None
     NW_MODE = 0
 
-    for i in range(1,6):
+    for i in range(5,6):
         print("--"*30,"Begin experiment :",i)
-        data = eval("experiment_{}(USE_DYNAMIC_AGENT,TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE)".format(i))
+        data = eval("experiment_{}(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE)".format(i))
         name_experimnet = data.get_name()
         experiment_info = data.get_parameter_experiment_text()
         path_experiment = PATH_SAVE_DATA + name_experimnet + "_" + experiment_info
@@ -42,7 +41,6 @@ def run_all_experimnet(gather_data = True):
             os.mkdir(path_experiment)
         experiment_analyzer(data,PATH_SAVE_DATA)
         data.save(PATH_SAVE_DATA)
-
         stop_to = STOP_TO[i]
         plot_all(path_experiment,stop_to)
 

@@ -51,7 +51,7 @@ def plot_score(list_score,PATH,stop_to):
 
 
 def get_name_experiment(FOLDER_NAME):
-    tmp = FOLDER_NAME.split("GAMMA")
+    tmp = FOLDER_NAME.split("EPSILON")
     tmp = tmp[0]
     tmp = tmp.split("/")
     name = tmp[-1]
