@@ -13,6 +13,8 @@ class Data_garbage:
         self.name = new_name
 
     def get_name(self):
+        return  self.name
+    def get_parameter_experiment(self):
         GAMMA = str(self.dico_info_running["GAMMA"])
         ALPHA = str(self.dico_info_running["ALPHA"])
         EPSILON = str(self.dico_info_running["EPSILON"])
@@ -22,7 +24,7 @@ class Data_garbage:
         EPSILON_DECAY = str(self.dico_info_running["EPSILON_DECAY"])
         EPSILON_MIN =  str(self.dico_info_running["EPSILON_MIN"])
 
-        name = self.name + "_GAMMA_" + GAMMA + "_ALPHA_" + ALPHA + "_EPSILON_" \
+        name = "_GAMMA_" + GAMMA + "_ALPHA_" + ALPHA + "_EPSILON_" \
                + EPSILON + "_USE_DYNAMIC_AGENT_" + USE_DYNAMIC_AGENT + "_TRONCATE_" + TRONCATE + "_MODE_NW_" + MODE_NW \
                + "_EPSILON_DECAY_" + EPSILON_DECAY + "_EPSILON_MIN_" + EPSILON_MIN
 
@@ -155,6 +157,12 @@ class Data_garbage:
 
     def get_info_experiment(self):
         return self.dico_info_running
+
+    def save(self,SAVE_TO):
+        name = SAVE_TO + self.get_name() + "_" +  self.get_parameter_experiment() + "/" + self.get_name() + ".pkl"
+
+        with open(name, 'wb') as fp:
+            pickle.dump("data", fp)
 
 
 class Data_episode:

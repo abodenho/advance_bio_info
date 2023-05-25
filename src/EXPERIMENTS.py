@@ -63,8 +63,13 @@ def experiment_5():
     PATH = "../Dataset/Rat_lemur_opossum.txt"
     TYPE_PARSING = "txt"
 
+    #PARAMETER TO PLAY WITH
+
+
+    #SAVING DATA
     data = experiment(PATH,TYPE_PARSING)
     data.set_name_experiment("Rat_lemur_opossum")
+
     return data
 
 

@@ -86,7 +86,7 @@ def experiment_analyzer(data,SAVE_TO,stop_to):
     best_AL, best_EM, best_CS = get_AL(best_alignement),get_EM(best_alignement),get_CS(best_alignement)
     words_AL, words_EM, words_CS = get_AL(worst_alignement),get_EM(worst_alignement),get_CS(worst_alignement)
 
-    name = SAVE_TO + data.get_name() + "/" + data.get_name()
+    name = SAVE_TO + data.get_name() + "_" + data.get_parameter_experiment() + "/" + data.get_name()
 
 
     running_info = data.get_info_experiment()
@@ -126,9 +126,12 @@ def experiment_analyzer(data,SAVE_TO,stop_to):
             f.write("\t " + str(alignement) + "\n")
 
     f.close()
-    plot_time(time_series,name,stop_to)
-    plot_score(score_average,name,stop_to)
-    plot_best_score(best_score_average,name,stop_to)
+
+
+    ## PLOT CREATION
+    #plot_time(time_series,name,stop_to)
+    #plot_score(score_average,name,stop_to)
+    #plot_best_score(best_score_average,name,stop_to)
 
 def get_best_info(data):
     list_time_best_score = []
