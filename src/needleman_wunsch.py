@@ -84,7 +84,7 @@ def _compute_matrix(aligned_seqs, new_seq, MODE):
                     print("ERROR")
                     sys.exit()
 
-    print(np.array(matrix))
+    #print(np.array(matrix))
     return directions
 
 def _find_path(aligned_seqs, new_seq, MODE):
