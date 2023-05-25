@@ -10,11 +10,12 @@ INFINITY = float("inf")
 class Environement:
 
     class calculator_needleman_wunsch:
-        def __init__(self):
+        def __init__(self,MODE_NW):
             self.actual_sequences_encounter = []
             self.actual_sequences_aligned = []
             self.known_alignement_sequence = {}
             self.known_alignement_sequence_score = {}
+            self.MODE_NW = MODE_NW
 
         def renitialise(self):
             self.actual_sequences_encounter = []
@@ -30,7 +31,7 @@ class Environement:
             self.actual_sequences_encounter.append(sequence)
             if len(self.actual_sequences_encounter) == 1:
                 score = 0
-            else: #TODO optimization "1 2" == "2 1" , "1 2 3" == "2 1 3"
+            else:
                 if action_list in self.known_alignement_sequence_score: # case we kno the values
                     score = self.known_alignement_sequence_score[action_list]
                     self.actual_sequences_aligned = self.known_alignement_sequence[action_list]
@@ -40,7 +41,7 @@ class Environement:
                         seq2 = self.actual_sequences_encounter[1]
 
                         #Calculate info
-                        self.actual_sequences_aligned = needleman_wunsch(deepcopy(seq1),deepcopy(seq2)) # TODO opti nécéssaire
+                        self.actual_sequences_aligned = needleman_wunsch(deepcopy(seq1),deepcopy(seq2)) #
                         score = compute_score(self.actual_sequences_aligned)
                         ## Update info
                         self.known_alignement_sequence_score[action_list] = score
@@ -48,14 +49,14 @@ class Environement:
 
 
                     else:  # multiple alignement
-                        self.actual_sequences_aligned = needleman_wunsch(deepcopy(self.actual_sequences_aligned),deepcopy(sequence))
+                        self.actual_sequences_aligned = needleman_wunsch(deepcopy(self.actual_sequences_aligned),deepcopy(sequence),version=self.MODE_NW)
                         score = compute_score(self.actual_sequences_aligned)
                         self.known_alignement_sequence_score[action_list] = score
                         self.known_alignement_sequence[action_list] = deepcopy(self.actual_sequences_aligned)
             return score
 
 
-    def __init__(self,path_folder,type_parsing,tree_choice = 1):
+    def __init__(self,path_folder,type_parsing,tree_choice = 1,NW_MODE=0):
         ### Static information
         type_parsing = type_parsing.lower()
         self.__dico_sequence = self.__parse(path_folder,type_parsing)
@@ -71,7 +72,7 @@ class Environement:
         self.__list_action = []
         self.__has_multiple_same_action = False
         self.finish = False
-        self.NeedWunsch = self.calculator_needleman_wunsch()
+        self.NeedWunsch = self.calculator_needleman_wunsch(NW_MODE)
 
     def step(self,choice_agent):
         self.__list_action.append(choice_agent)
