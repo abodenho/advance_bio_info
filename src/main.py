@@ -29,7 +29,7 @@ def run_all_experimnet(gather_data = True):
     ESPILON_MIN = None
     NW_MODE = 0
 
-    for i in range(5,6):
+    for i in range(1,6):
         print("--"*30,"Begin experiment :",i)
         data = eval("experiment_{}(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE)".format(i))
         name_experimnet = data.get_name()
