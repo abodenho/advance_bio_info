@@ -15,7 +15,8 @@ def plot_time(list_time, PATH ,stop_to):
     plt.title("Time evolution")
     plt.plot([*range(number_episode)],list_time)
     plt.savefig(PATH + "/"+ "time_plot.png")
-    plt.show()
+    # plt.show()
+    plt.clf()
 
 
 def plot_best_score(list_score,PATH, stop_to):
@@ -31,7 +32,8 @@ def plot_best_score(list_score,PATH, stop_to):
     plt.title("Best score evolution")
     plt.plot([*range(number_episode)], list_score)
     plt.savefig(PATH +"/" + "best_score_plot.png")
-    plt.show()
+    # plt.show()
+    plt.clf()
 
 def plot_score(list_score,PATH,stop_to):
 
@@ -47,7 +49,8 @@ def plot_score(list_score,PATH,stop_to):
     plt.title("Score evolution")
     plt.plot([*range(number_episode)], list_score)
     plt.savefig(PATH +"/" +  "score_plot.png")
-    plt.show()
+    # plt.show()
+    plt.clf()
 
 
 def get_name_experiment(FOLDER_NAME):

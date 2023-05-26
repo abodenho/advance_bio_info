@@ -5,10 +5,10 @@ from needleman_wunsch import compute_score, needleman_wunsch
 import os
 ALL_DATA = {
     "Rat_lemur_opossum": ("../Dataset/Rat_lemur_opossum.txt", "txt"),
+    "Lemur_gorilla_mouse" : ( "../Dataset/Lemur_gorilla_mouse.txt","txt"),
     "Hepatitis_C" : ("../Dataset/Hepatitis_C","fasta"),
     "Papio_Anubis" : ("../Dataset/Papio_Anubis","fasta"),
-    "Dataset_1" : ("../Dataset/Dataset_1.txt", "txt"),
-    "Lemur_gorilla_mouse" : ( "../Dataset/Lemur_gorilla_mouse.txt","txt")
+    "Dataset_1" : ("../Dataset/Dataset_1.txt", "txt")
 }
 
 
@@ -77,6 +77,7 @@ def _write_data(path,list_best_index_alignement,list_best_alignement,score,numbe
 
 def run_brute_force():
     for key in ALL_DATA:
+        print(key)
         path, format_file = ALL_DATA[key]
 
         # retrive datas
