@@ -3,6 +3,7 @@ from data_analyzer import *
 import os
 from plotting import plot_all
 from enum import Enum
+from brute_force import run_brute_force
 
 PATH_SAVE_DATA = "../data_experiment/"
 
@@ -53,29 +54,34 @@ def get_experiment_values(test_number):
     return TRONCATE, EPSILON, ESPILON_DECAY, ESPILON_MIN, NW_MODE
 
 
-def run_all_experimnet(gather_data = True,test_number = test_class.VANILLA):
+def run_all_experimnet(gather_data = True,test_number = test_class.BRUTE_FORCE):
 
-    if gather_data and not os.path.isdir(PATH_SAVE_DATA):
-        os.mkdir(PATH_SAVE_DATA)
 
-    #PARAMETER TO PLAY WITH
+    if test_number != test_class.BRUTE_FORCE:
+        if gather_data and not os.path.isdir(PATH_SAVE_DATA):
+            os.mkdir(PATH_SAVE_DATA)
 
-    TRONCATE, EPSILON, ESPILON_DECAY, ESPILON_MIN, NW_MODE = get_experiment_values(test_number)
+        #PARAMETER TO PLAY WITH
 
-    for i in range(1,6):
-        print("--"*30,"Begin experiment :",i)
-        data = eval("experiment_{}(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE)".format(i))
-        name_experimnet = data.get_name()
-        experiment_info = data.get_parameter_experiment_text()
-        path_experiment = PATH_SAVE_DATA + name_experimnet + "_" + experiment_info
+        TRONCATE, EPSILON, ESPILON_DECAY, ESPILON_MIN, NW_MODE = get_experiment_values(test_number)
 
-        print("END experiment ",name_experimnet ,"--"*30)
-        if gather_data and not os.path.isdir(path_experiment):
-            os.mkdir(path_experiment)
-        experiment_analyzer(data,PATH_SAVE_DATA)
-        data.save(PATH_SAVE_DATA)
-        stop_to = STOP_TO[i]
-        plot_all(path_experiment,stop_to)
+        for i in range(1,6):
+            print("--"*30,"Begin experiment :",i)
+            data = eval("experiment_{}(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE)".format(i))
+            name_experimnet = data.get_name()
+            experiment_info = data.get_parameter_experiment_text()
+            path_experiment = PATH_SAVE_DATA + name_experimnet + "_" + experiment_info
+
+            print("END experiment ",name_experimnet ,"--"*30)
+            if gather_data and not os.path.isdir(path_experiment):
+                os.mkdir(path_experiment)
+            experiment_analyzer(data,PATH_SAVE_DATA)
+            data.save(PATH_SAVE_DATA)
+            stop_to = STOP_TO[i]
+            plot_all(path_experiment,stop_to)
+
+    else:
+        run_brute_force()
 
 
 
