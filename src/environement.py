@@ -164,3 +164,7 @@ class Environement:
 
     def get_number_sequence(self):
         return len(self.__dico_sequence)
+
+    def get_dico_sequence(self):
+        return deepcopy(self.__dico_sequence)
+
