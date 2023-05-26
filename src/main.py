@@ -54,7 +54,7 @@ def get_experiment_values(test_number):
     return TRONCATE, EPSILON, ESPILON_DECAY, ESPILON_MIN, NW_MODE
 
 
-def run_all_experimnet(gather_data = True,test_number = test_class.BRUTE_FORCE):
+def run_all_experimnet(gather_data = True,test_number = test_class.VANILLA):
 
 
     if test_number != test_class.BRUTE_FORCE:
