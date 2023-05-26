@@ -47,12 +47,13 @@ def _get_name(path_data):
         name = name.split(".")[0]
     return name
 
-def _write_data(path,list_best_index_alignement,list_best_alignement,score,number_permutation):
+def _write_data(path,list_best_index_alignement,list_best_alignement,score,number_permutation,time):
     f = open(path + "/"+"data.txt", "w")
 
     f.write("Numbre total different permutation : " + str(number_permutation) + "\n")
     f.write("Best score : " + str(score) +" \n")
     f.write("Number alignement with this score : " + str(len(list_best_alignement)) + "\n")
+    f.write("Time taken (in second) to run all permutation : " + str(time) + "\n" )
     f.write("\n")
     f.write("List index of those sequences : \n")
     for elem in list_best_index_alignement :
@@ -95,6 +96,6 @@ def run_brute_force():
 
         if not os.path.isdir(path_saving):
             os.mkdir(path_saving)
-        _write_data(path_saving, list_best_index_alignement, list_best_alignement, best_score, number_permutation)
+        _write_data(path_saving, list_best_index_alignement, list_best_alignement, best_score, number_permutation,end)
 
 
