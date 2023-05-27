@@ -15,6 +15,7 @@ T   -1  -1  -1   1
 # MODE 2 = Different scoring                    :    {'match': 3, 'mismatch': -1, 'gap':-2, 'extend':-2}
 # MODE 3 = Different equality (Diagonal last)
 
+SCORE = {'match': 2, 'mismatch': -1, 'gap':-2}
 score = {'match': 2, 'mismatch': -1, 'gap':-2, 'extend':-2}
 
 def _set_score(MODE):
@@ -108,11 +109,11 @@ def compute_score(seqs): # TODO optimize with memoisation
     for seq_A, seq_B in combinations(seqs, 2):
         for a, b in zip(seq_A, seq_B):
             if a=='-' or b=='-':
-                rep += score['gap']
+                rep += SCORE['gap']
             elif a==b:
-                rep += score['match']
+                rep += SCORE['match']
             else:
-                rep += score['mismatch']
+                rep += SCORE['mismatch']
     return rep
 
 def needleman_wunsch(profile, seq, *, version=0):

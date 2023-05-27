@@ -22,7 +22,7 @@ def _brut_force(all_sequences):
         for index_sequence in permutation: # create the alignement
             sequence = all_sequences[index_sequence]
             if len(current_alignement) != 0:
-                current_alignement = needleman_wunsch(current_alignement,sequence)
+                current_alignement = needleman_wunsch(current_alignement,sequence, version=0)
             else:
                 current_alignement.append(sequence)
 

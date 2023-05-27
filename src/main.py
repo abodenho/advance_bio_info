@@ -79,7 +79,7 @@ def run_all_experimnet(gather_data = True,test_number = test_class.VANILLA.value
             data.save(PATH_SAVE_DATA)
             stop_to = STOP_TO[i]
             plot_all(path_experiment,stop_to)
-    run_brute_force()
+    # run_brute_force()
 
 
 
