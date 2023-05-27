@@ -7,7 +7,7 @@ from brute_force import run_brute_force
 
 PATH_SAVE_DATA = "../data_experiment/"
 
-STOP_TO = { # COPY of article information
+STOP_TO = { # COPY of article information + 50
     1 : 150,
     2 : 210,
     3 : 150,

@@ -83,3 +83,4 @@ def plot_all(FOLDER_DATA,STOP_TO):
     plot_best_score(best_score_average,FOLDER_DATA,STOP_TO)
     plot_score(score_average,FOLDER_DATA,STOP_TO)
     plot_time(time_series,FOLDER_DATA,STOP_TO)
+
