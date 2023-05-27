@@ -43,15 +43,15 @@ def get_key_dico(path):
     if "VANILLA" in path:
         key = "VANILLA"
     elif "DECAY" in path:
-        key = "EPSILON_DECAY"
+        key = "EPSILON DECAY"
     elif "TRUNCATURE" in path:
-        key = "WITHOUT_TRUNCATURE"
+        key = "WITHOUT PRUNING"
     elif "EXTEND" in path:
-        key = "MSA_EXTEND_GAP"
+        key = "MSA EXTEND GAP"
     elif "MSA_SCORING" in path:
-        key = "MSA_SCORING"
+        key = "MSA SCORING"
     elif "MSA_PRIORITY" in path:
-        key = "MSA_PRIORITY"
+        key = "MSA PRIORITY"
     else:
         raise Exception
 
@@ -105,8 +105,8 @@ def normal_plot(data,stop_to,name_experiment):
 
     plt.grid(True)
     plt.xlabel("Episode")
-    plt.ylabel("Time to reach episode average (seconds)")
-    plt.title("Time evolution" + " "  + name_experiment)
+    plt.ylabel("Time (seconds)")
+    plt.title("Execution time on " + name_experiment + " dataset")
     for index in range(len(list_time_series)):
         label = labels[index]
         time_series = list_time_series[index]
@@ -120,8 +120,8 @@ def normal_plot(data,stop_to,name_experiment):
 
     plt.grid(True)
     plt.xlabel("Episode")
-    plt.ylabel("Best score average")
-    plt.title("Best score evolution" + " "  + name_experiment)
+    plt.ylabel("Best score")
+    plt.title("Best score evolution on " + name_experiment + " dataset")
     for index in range(len(list_best_score)):
         label = labels[index]
         best_score = list_best_score[index]
@@ -130,45 +130,6 @@ def normal_plot(data,stop_to,name_experiment):
     #plt.scatter(bf_number_permutation, bf_best_score, s=100, label="BRUTE_FORCE")
     plt.legend()
     plt.savefig("../ultimate_plot/"+ name_experiment + "_best_score_plot.png")
-    plt.clf()
-
-
-
-def hepatitis_plot(data,stop_to,name_experiment):
-    labels = []
-    list_time_series = []
-    list_best_score = []
-    for setting in data:
-        if setting != "BRUTE_FORCE":
-            time_series, best_score_average = data[setting]
-            labels.append(setting)
-            list_time_series.append(time_series)
-            list_best_score.append(best_score_average)
-
-    plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Time to reach episode average (seconds)")
-    plt.title("Time evolution" + " " + name_experiment)
-    for index in range(len(list_time_series)):
-        label = labels[index]
-        time_series = list_time_series[index]
-        plot(time_series, stop_to, label)
-
-    plt.legend()
-
-    plt.savefig("../ultimate_plot/" + name_experiment + "_time_plot.png")
-    plt.clf()
-
-    plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Best score average")
-    plt.title("Best score evolution")
-    for index in range(len(list_best_score)):
-        label = labels[index]
-        best_score = list_best_score[index]
-        plot(best_score, stop_to, label)
-    plt.legend()
-    plt.savefig("../ultimate_plot/" + name_experiment + "_best_score_plot.png")
     plt.clf()
 
 
@@ -197,14 +158,9 @@ def plot_experiment():
     for experiment in LIST_NAME_EXPERIMENT:
         all_data[experiment] = gather_all_data(experiment)
 
-
-
     #Key :  experiment name | value : dictionnary -> key : setting | value : datas
 
     for experiment in LIST_NAME_EXPERIMENT:
-        if experiment != "Hepatitis_C":
-            normal_plot(all_data[experiment],STOP_TO[experiment],experiment)
-        else:
-            hepatitis_plot(all_data[experiment],STOP_TO[experiment],experiment)
+        normal_plot(all_data[experiment],STOP_TO[experiment],experiment)
 
 plot_experiment()
