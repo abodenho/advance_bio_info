@@ -12,6 +12,28 @@ ALL_DATA = {
     "Rat_lemur_opossum": ("../Dataset/Rat_lemur_opossum.txt", "txt"),
 }
 
+def get_AL(list_alignement):
+    return len(list_alignement[0])
+
+def get_EM(list_alignement):
+    lenght = get_AL(list_alignement)
+    number_exact_match = 0
+    for column in range(lenght):
+        is_same = True
+        base = list_alignement[0][column] #take the char of the first alignement as referencement
+        for alignement in list_alignement:
+            if alignement[column] != base:
+                is_same = False
+                break
+        if is_same:
+            number_exact_match += 1
+
+    return number_exact_match
+
+def get_CS(list_alignement):
+    AL = get_AL(list_alignement)
+    EM = get_EM(list_alignement)
+    return EM/AL
 
 def _brut_force(all_sequences):
     all_permutation  = list(permutations(range(len(all_sequences))))
@@ -70,6 +92,10 @@ def _write_data(path,list_best_index_alignement,list_best_alignement,score,numbe
         f.write("-> for the seq " + str(index_list) + " : \n")
         for sequence in alignement:
             f.write("\t" + str(sequence) + "\n")
+        f.write("\t -> value AL " + str(get_AL(alignement)) + "\n")
+        f.write("\t -> value EM " + str(get_EM(alignement)) + "\n")
+        f.write("\t -> value CS " + str(get_CS(alignement)) + "\n")
+
 
         f.write("\n ")
 
