@@ -16,10 +16,10 @@ From the worst alignement encounter :
  
 ----------Reach best score----------
  
-Average episode to best score : 2.92
-Average time to best score : 0.00022217750549316406
-STD episode to best score : 1.6714065932620943
-STD  time to best score : 0.0005425957756699075
+Average episode to best score : 3.32
+Average time to best score : 0.0003877735137939453
+STD episode to best score : 2.05367962447895
+STD  time to best score : 0.0010991955330118676
  
 ----------Experiment info----------
  
