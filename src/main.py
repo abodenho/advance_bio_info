@@ -100,8 +100,8 @@ def run_experimnet(setting, experiment):
 
         experiment_analyzer(data,path_experiment_folder)
         data.save(path_experiment_folder)
-        stop_to = STOP_TO[experiment]
-        plot_all(path_experiment_folder,name_experimnet,stop_to)
+        #stop_to = STOP_TO[experiment]
+        #plot_all(path_experiment_folder,name_experimnet,stop_to)
     else:
         run_brute_force(experiment,setting,get_setting_name(setting))
 
