@@ -101,7 +101,7 @@ def normal_plot(data,stop_to,name_experiment):
             list_best_score.append(best_score_average)
 
         else:
-            number_permutation, best_score, time = data[setting]
+            bf_number_permutation, bf_best_score, bf_time = data[setting]
 
     plt.grid(True)
     plt.xlabel("Episode")
@@ -111,8 +111,10 @@ def normal_plot(data,stop_to,name_experiment):
         label = labels[index]
         time_series = list_time_series[index]
         plot(time_series,stop_to,label)
-    plt.legend()
 
+    plt.scatter(bf_number_permutation,bf_time,s=100,label="BRUTE_FORCE")
+
+    plt.legend()
     plt.savefig("../ultimate_plot/"+ name_experiment + "_time_plot.png")
     plt.clf()
 
@@ -124,6 +126,8 @@ def normal_plot(data,stop_to,name_experiment):
         label = labels[index]
         best_score = list_best_score[index]
         plot(best_score,stop_to,label)
+
+    plt.scatter(bf_number_permutation, bf_best_score, s=100, label="BRUTE_FORCE")
     plt.legend()
     plt.savefig("../ultimate_plot/"+ name_experiment + "_best_score_plot.png")
     plt.clf()
@@ -149,6 +153,7 @@ def hepatitis_plot(data,stop_to,name_experiment):
         label = labels[index]
         time_series = list_time_series[index]
         plot(time_series, stop_to, label)
+
     plt.legend()
 
     plt.savefig("../ultimate_plot/" + name_experiment + "_time_plot.png")
