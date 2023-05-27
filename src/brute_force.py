@@ -6,9 +6,9 @@ import os
 ALL_DATA = {
     "Rat_lemur_opossum": ("../Dataset/Rat_lemur_opossum.txt", "txt"),
     "Lemur_gorilla_mouse" : ( "../Dataset/Lemur_gorilla_mouse.txt","txt"),
-    "Hepatitis_C" : ("../Dataset/Hepatitis_C","fasta"),
+    "Dataset_1" : ("../Dataset/Dataset_1.txt", "txt"),
     "Papio_Anubis" : ("../Dataset/Papio_Anubis","fasta"),
-    "Dataset_1" : ("../Dataset/Dataset_1.txt", "txt")
+    "Hepatitis_C" : ("../Dataset/Hepatitis_C","fasta")
 }
 
 

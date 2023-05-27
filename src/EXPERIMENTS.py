@@ -78,8 +78,8 @@ def experiment_5(TRONCATE,EPSILON,ESPILON_DECAY,ESPILON_MIN,NW_MODE):
     return data
 
 
-def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.01, NUMBER_TRAINING_EPISODE = 10**4 ,NUMBER_REPITION_EXPERIMENT = 25,
-               USE_DYNAMIC_AGENT = True, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False, ESPILON_DECAY = None , ESPILON_MIN = None, NW_MODE = 0) :
+def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBER_TRAINING_EPISODE = 10**3 ,NUMBER_REPITION_EXPERIMENT = 25,
+               USE_DYNAMIC_AGENT = True, TREE_CHOICE = 1,TRONCATE = True,VERBOSE = False, ESPILON_DECAY = None , ESPILON_MIN = None, NW_MODE = 0) : # NUMBER_TRAINING_EPISODE = 10**4
 
 
     # ----------------------------------------  INIT Environement ---------------------------------------------
