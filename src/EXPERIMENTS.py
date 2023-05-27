@@ -96,7 +96,7 @@ def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBE
     data_keeper.add_info_experiment(GAMMA, ALPHA, EPSILON, NUMBER_TRAINING_EPISODE,NUMBER_REPITION_EXPERIMENT,
                                     USE_DYNAMIC_AGENT, TREE_CHOICE,TRONCATE,ESPILON_DECAY,ESPILON_MIN,NW_MODE)
     for experiment in range(NUMBER_REPITION_EXPERIMENT):
-
+        environement = Environement(PATH, TYPE_PARSING, TREE_CHOICE, NW_MODE)
         if USE_DYNAMIC_AGENT:
             agent = Dynamic_q_learning(LIST_POSSIBLE_ACTION, NUMBER_STATE, GAMMA, ALPHA, EPSILON,ESPILON_DECAY,ESPILON_MIN)
         else:
@@ -105,6 +105,7 @@ def experiment(PATH,TYPE_PARSING, GAMMA = 0.9, ALPHA = 0.8, EPSILON = 0.2, NUMBE
         print("Repetion ",experiment)
         data_keeper.begin_new_experiment()
         play_game(environement,agent,NUMBER_TRAINING_EPISODE,data_keeper,TRONCATE,VERBOSE)
+        environement = Environement(PATH, TYPE_PARSING, TREE_CHOICE, NW_MODE)
         print("*"*50)
     return data_keeper
 

@@ -171,12 +171,12 @@ class Data_garbage:
         return self.dico_info_running
 
     def save(self,SAVE_TO):
-        name = SAVE_TO + self.get_name() + "_" + self.get_parameter_experiment_text() + "/" + self.get_name() +"_dico_info_running" + ".pkl"
+        name = SAVE_TO +  self.get_name() +"_dico_info_running" + ".pkl"
         with open(name, 'wb') as fp:
             pickle.dump(self.dico_info_running, fp)
 
 
-        name = SAVE_TO + self.get_name() + "_" + self.get_parameter_experiment_text() + "/" + self.get_name() +"_experiment_info" + ".pkl"
+        name = SAVE_TO + self.get_name() +"_experiment_info" + ".pkl"
         with open(name, 'wb') as fp:
             pickle.dump(self.experiment_info, fp)
 

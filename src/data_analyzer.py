@@ -30,13 +30,12 @@ def experiment_analyzer(data,SAVE_TO):
     best_AL, best_EM, best_CS = get_AL(best_alignement),get_EM(best_alignement),get_CS(best_alignement)
     words_AL, words_EM, words_CS = get_AL(worst_alignement),get_EM(worst_alignement),get_CS(worst_alignement)
 
-    name = SAVE_TO + data.get_name() + "_" + data.get_parameter_experiment_text() + "/" + data.get_name()
 
 
     running_info = data.get_info_experiment()
 
     mean_episode, mean_time, std_episode, std_time  = get_best_info(data)
-    with open(name + '.txt', 'w') as f:
+    with open(SAVE_TO + data.get_name() + '.txt', 'w') as f:
 
         f.write(title("Score result"))
 

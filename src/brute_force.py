@@ -3,12 +3,13 @@ from  itertools import permutations
 from time import time
 from needleman_wunsch import compute_score, needleman_wunsch
 import os
+
 ALL_DATA = {
+    "Hepatitis_C": ("../Dataset/Hepatitis_C", "fasta"),
+    "Papio_Anubis": ("../Dataset/Papio_Anubis", "fasta"),
+    "Dataset_1": ("../Dataset/Dataset_1.txt", "txt"),
+    "Lemur_gorilla_mouse": ("../Dataset/Lemur_gorilla_mouse.txt", "txt"),
     "Rat_lemur_opossum": ("../Dataset/Rat_lemur_opossum.txt", "txt"),
-    "Lemur_gorilla_mouse" : ( "../Dataset/Lemur_gorilla_mouse.txt","txt"),
-    "Dataset_1" : ("../Dataset/Dataset_1.txt", "txt"),
-    "Papio_Anubis" : ("../Dataset/Papio_Anubis","fasta"),
-    "Hepatitis_C" : ("../Dataset/Hepatitis_C","fasta")
 }
 
 
@@ -75,28 +76,30 @@ def _write_data(path,list_best_index_alignement,list_best_alignement,score,numbe
     f.close()
 
 
-def run_brute_force():
-    for key in ALL_DATA:
-        print(key)
-        path, format_file = ALL_DATA[key]
+def run_brute_force(experiment,setting_value,setting_name):
+    key = list(ALL_DATA.keys())[experiment-1]
+    path, format_file = ALL_DATA[key]
 
-        # retrive datas
-        sequences = Environement(path, format_file).get_dico_sequence()
+    # retrive datas
+    sequences = Environement(path, format_file).get_dico_sequence()
 
-        # begin experiment
-        begin = time()
-        list_best_index_alignement, list_best_alignement, best_score, number_permutation = _brut_force(sequences)
-        end = time() - begin
+    # begin experiment
+    begin = time()
+    list_best_index_alignement, list_best_alignement, best_score, number_permutation = _brut_force(sequences)
+    end = time() - begin
 
 
-        # save inforamtion
-        name_experiment = _get_name(path) + "_brute_force"
-        path_saving = "../data_experiment/{}".format(name_experiment)
-        if not os.path.isdir("../data_experiment"):
-            os.mkdir("../data_experiment")
+    # save inforamtion
+    name_experiment = _get_name(path) + "_brute_force"
+    path_saving = "../data_experiment/" + str(setting_value) +"_" + setting_name + "/" + name_experiment
 
-        if not os.path.isdir(path_saving):
-            os.mkdir(path_saving)
-        _write_data(path_saving, list_best_index_alignement, list_best_alignement, best_score, number_permutation,end)
+    if not os.path.isdir("../data_experiment"):
+        os.mkdir("../data_experiment")
+    if not os.path.isdir("../data_experiment/" + str(setting_value) +"_" + setting_name + "/"):
+        os.mkdir("../data_experiment/" + str(setting_value) +"_" + setting_name + "/")
+    if not os.path.isdir(path_saving):
+        os.mkdir(path_saving)
+
+    _write_data(path_saving, list_best_index_alignement, list_best_alignement, best_score, number_permutation,end)
 
 
