@@ -112,7 +112,7 @@ def normal_plot(data,stop_to,name_experiment):
         time_series = list_time_series[index]
         plot(time_series,stop_to,label)
 
-    plt.scatter(bf_number_permutation,bf_time,s=100,label="BRUTE_FORCE")
+    #plt.scatter(bf_number_permutation,bf_time,s=100,label="BRUTE_FORCE")
 
     plt.legend()
     plt.savefig("../ultimate_plot/"+ name_experiment + "_time_plot.png")
@@ -127,7 +127,7 @@ def normal_plot(data,stop_to,name_experiment):
         best_score = list_best_score[index]
         plot(best_score,stop_to,label)
 
-    plt.scatter(bf_number_permutation, bf_best_score, s=100, label="BRUTE_FORCE")
+    #plt.scatter(bf_number_permutation, bf_best_score, s=100, label="BRUTE_FORCE")
     plt.legend()
     plt.savefig("../ultimate_plot/"+ name_experiment + "_best_score_plot.png")
     plt.clf()
