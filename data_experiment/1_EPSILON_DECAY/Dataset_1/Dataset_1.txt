@@ -1,0 +1,50 @@
+----------Score result----------
+ 
+Average score : 163.0 	 | STD score : 0.0  
+Biggest score encounter : 163 	 | lowest score encounter : 163 
+ 
+----------AL, EM , CS----------
+ 
+From the best alignement encounter : 
+ 	 - AL : 42 
+ 	 - EM : 31 
+ 	 - CS : 0.7380952380952381 
+From the worst alignement encounter : 
+ 	 - AL : 42 
+ 	 - EM : 31 
+ 	 - CS : 0.7380952380952381 
+ 
+----------Reach best score----------
+ 
+Average episode to best score : 5.12
+Average time to best score : 0.00041554450988769533
+STD episode to best score : 3.0373672810511407
+STD  time to best score : 0.0007150700261938507
+ 
+----------Experiment info----------
+ 
+GAMMA : 0.9
+ALPHA : 0.8
+EPSILON : 1
+NUMBER_TRAINING_EPISODE : 1000
+NUMBER_REPITION_EXPERIMENT : 25
+USE_DYNAMIC_AGENT : True
+TREE_CHOICE : stupid_tree
+TRONCATE : True
+EPSILON_DECAY : 0.95
+EPSILON_MIN : 0.01
+MODE_NW : 0
+
+----------Alignement----------
+ 
+BEST ENCOUNTER : [2, 0, 1]
+	 ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
+	 ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+	 ggcctctgccttataacacaaatctt-aaca-ggactatttc
+
+ 
+ 
+Worst ENCOUNTER : [2, 0, 1] 
+ 	 ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
+	 ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+	 ggcctctgccttataacacaaatctt-aaca-ggactatttc
