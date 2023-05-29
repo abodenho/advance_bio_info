@@ -16,10 +16,10 @@ From the worst alignement encounter :
  
 ----------Reach best score----------
  
-Average episode to best score : 12.2
-Average time to best score : 0.10580053329467773
-STD episode to best score : 10.380751417888785
-STD  time to best score : 0.020509955761273825
+Average episode to best score : 50.92
+Average time to best score : 0.04385416030883789
+STD episode to best score : 144.8891769594955
+STD  time to best score : 0.021860024084729732
  
 ----------Experiment info----------
  
@@ -27,7 +27,7 @@ GAMMA : 0.9
 ALPHA : 0.8
 EPSILON : 0.2
 NUMBER_TRAINING_EPISODE : 1000
-NUMBER_REPITION_EXPERIMENT : 5
+NUMBER_REPITION_EXPERIMENT : 25
 USE_DYNAMIC_AGENT : True
 TREE_CHOICE : stupid_tree
 TRONCATE : True

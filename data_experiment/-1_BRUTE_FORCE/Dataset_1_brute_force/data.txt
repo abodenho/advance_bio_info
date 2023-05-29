@@ -1,7 +1,7 @@
 Numbre total different permutation : 6
 Best score : 163 
 Number alignement with this score : 6
-Time taken (in second) to run all permutation : 0.0345001220703125
+Time taken (in second) to run all permutation : 0.017343997955322266
 
 List index of those sequences : 
 (0, 1, 2)
@@ -16,30 +16,48 @@ Alignement for those sequences :
 	ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
 	ggcctctgccttataacacaaatctt-aaca-ggactatttc
 	ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
+	 -> value AL 42
+	 -> value EM 31
+	 -> value CS 0.7380952380952381
 
  -> for the seq (0, 2, 1) : 
 	ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
 	ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
 	ggcctctgccttataacacaaatctt-aaca-ggactatttc
+	 -> value AL 42
+	 -> value EM 31
+	 -> value CS 0.7380952380952381
 
  -> for the seq (1, 0, 2) : 
 	ggcctctgccttataacacaaatctt-aaca-ggactatttc
 	ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
 	ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
+	 -> value AL 42
+	 -> value EM 31
+	 -> value CS 0.7380952380952381
 
  -> for the seq (1, 2, 0) : 
 	ggcctctgccttataacacaaatctt-aaca-ggactatttc
 	ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
 	ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+	 -> value AL 42
+	 -> value EM 31
+	 -> value CS 0.7380952380952381
 
  -> for the seq (2, 0, 1) : 
 	ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
 	ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
 	ggcctctgccttataacacaaatctt-aaca-ggactatttc
+	 -> value AL 42
+	 -> value EM 31
+	 -> value CS 0.7380952380952381
 
  -> for the seq (2, 1, 0) : 
 	ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
 	ggcctctgccttataacacaaatctt-aaca-ggactatttc
 	ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+	 -> value AL 42
+	 -> value EM 31
+	 -> value CS 0.7380952380952381
 
  

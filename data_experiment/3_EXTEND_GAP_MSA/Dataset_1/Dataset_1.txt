@@ -16,10 +16,10 @@ From the worst alignement encounter :
  
 ----------Reach best score----------
  
-Average episode to best score : 2.4
-Average time to best score : 0.00899968147277832
-STD episode to best score : 1.2
-STD  time to best score : 0.002280551861701557
+Average episode to best score : 2.8
+Average time to best score : 0.0034638404846191405
+STD episode to best score : 1.7663521732655694
+STD  time to best score : 0.0008197577066936534
  
 ----------Experiment info----------
  
@@ -27,7 +27,7 @@ GAMMA : 0.9
 ALPHA : 0.8
 EPSILON : 0.2
 NUMBER_TRAINING_EPISODE : 1000
-NUMBER_REPITION_EXPERIMENT : 5
+NUMBER_REPITION_EXPERIMENT : 25
 USE_DYNAMIC_AGENT : True
 TREE_CHOICE : stupid_tree
 TRONCATE : True
@@ -37,14 +37,14 @@ MODE_NW : 1
 
 ----------Alignement----------
  
-BEST ENCOUNTER : [1, 0, 2]
-	 ggcctctgccttataacacaaatctt-aaca-ggactatttc
+BEST ENCOUNTER : [0, 1, 2]
 	 ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+	 ggcctctgccttataacacaaatctt-aaca-ggactatttc
 	 ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
 
  
  
-Worst ENCOUNTER : [1, 0, 2] 
- 	 ggcctctgccttataacacaaatctt-aaca-ggactatttc
-	 ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+Worst ENCOUNTER : [0, 1, 2] 
+ 	 ggcctctgcctaatcacacagatc-t-aaca-ggattatttc
+	 ggcctctgccttataacacaaatctt-aaca-ggactatttc
 	 ggcttcag-cttat-acacaaatcttaaacagggacta-ttc
