@@ -116,7 +116,7 @@ def run_brute_force(experiment,setting_value,setting_name):
 
 
     # save inforamtion
-    name_experiment = _get_name(path) + "_brute_force"
+    name_experiment = _get_name(path)
     path_saving = "../data_experiment/" + str(setting_value) +"_" + setting_name + "/" + name_experiment
 
     if not os.path.isdir("../data_experiment"):

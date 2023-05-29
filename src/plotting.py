@@ -6,11 +6,11 @@ from data_garbage import Data_garbage
 
 PATH_BRUTE_FORCE = "../data_experiment/-1_BRUTE_FORCE"
 PATH_VANILLA = "../data_experiment/0_VANILLA"
-PATH_ESPILON_DECAY = "../data_experiment/1_EPSILON_DECAY"
-PATH_WITHOUT_TRUNCATURE = "../data_experiment/2_WITHOUT_TRUNCATURE"
-PATH_MSA_EXTENDED_GAP = "../data_experiment/3_MSA_EXTEND_GAP"
-PATH_MSA_SCORING = "../data_experiment/4_MSA_SCORING"
-PATH_MSA_PRIORITY = "../data_experiment/5_MSA_PRIORITY"
+PATH_ESPILON_DECAY = "../data_experiment/1_EPSILON_DECAY_Q"
+PATH_WITHOUT_TRUNCATURE = "../data_experiment/2_WITHOUT_TRUNCATURE_Q"
+PATH_MSA_EXTENDED_GAP = "../data_experiment/3_EXTEND_GAP_MSA"
+PATH_MSA_SCORING = "../data_experiment/4_DIFFENT_VALUE_MSA"
+PATH_MSA_PRIORITY = "../data_experiment/5_PRIORITY_ORDER_MSA"
 
 LIST_PATH_SETTINGS = [PATH_VANILLA,PATH_ESPILON_DECAY,PATH_WITHOUT_TRUNCATURE,PATH_MSA_EXTENDED_GAP,
                       PATH_MSA_SCORING,PATH_MSA_PRIORITY]
@@ -122,9 +122,9 @@ def get_key_dico(path):
         key = "WITHOUT PRUNING"
     elif "EXTEND" in path:
         key = "MSA EXTEND GAP"
-    elif "MSA_SCORING" in path:
+    elif "DIFFENT_VALUE" in path:
         key = "MSA SCORING"
-    elif "MSA_PRIORITY" in path:
+    elif "PRIORITY" in path:
         key = "MSA PRIORITY"
     else:
         raise Exception

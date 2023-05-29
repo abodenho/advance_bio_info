@@ -113,7 +113,6 @@ def run_all_experiment():
     setting = BRUTE_FORCE # special case brute force
     for experiment in [DATASET_1, LEMUR_GORILLA_MOUSE, RAT_LEMUR_OPOSSUM,PAPIO_ANUBIS]:
         run_experimnet(setting, experiment)
-    #plot_experiment() # UnCOMMENT only when all test are finish
 
 if __name__ == "__main__":
     VSCODE = False
@@ -121,4 +120,11 @@ if __name__ == "__main__":
         if os.getcwd().split('/')[-1] == "advance_bio_info": # When running on VSCode instead of Pycharm
             os.chdir("src")
 
-    run_all_experiment()
+    RUN_ALL_EXPERIMENT = False # you can change it
+    PLOT_GRAPH = True # you can change it
+
+    if RUN_ALL_EXPERIMENT:
+        run_all_experiment()
+
+    if PLOT_GRAPH:
+        plot_experiment()
