@@ -108,7 +108,9 @@ def compute_score(seqs): # TODO optimize with memoisation
     rep = 0
     for seq_A, seq_B in combinations(seqs, 2):
         for a, b in zip(seq_A, seq_B):
-            if a=='-' or b=='-':
+            if a=='-' and b=='-':
+                rep += 0
+            elif a=='-' or b=='-':
                 rep += SCORE['gap']
             elif a==b:
                 rep += SCORE['match']
