@@ -120,8 +120,8 @@ if __name__ == "__main__":
         if os.getcwd().split('/')[-1] == "advance_bio_info": # When running on VSCode instead of Pycharm
             os.chdir("src")
 
-    RUN_ALL_EXPERIMENT = True # you can change it
-    PLOT_GRAPH = False # you can change it
+    RUN_ALL_EXPERIMENT = False # you can change it
+    PLOT_GRAPH = True # you can change it
 
     if RUN_ALL_EXPERIMENT:
         run_all_experiment()
