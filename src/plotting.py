@@ -35,9 +35,9 @@ def plot_time(list_time, PATH ,stop_to):
         number_episode = len(list_time)
 
     plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Time to reach episode average (seconde)")
-    plt.title("Time evolution")
+    plt.xlabel("Episode", fontsize=15)
+    plt.ylabel("Time to reach episode average (seconde)", fontsize=15)
+    plt.title("Time evolution", fontsize=16)
     plt.plot([*range(number_episode)],list_time)
     plt.savefig(PATH + "/"+ "time_plot.png")
     # plt.show()
@@ -52,9 +52,9 @@ def plot_best_score(list_score,PATH, stop_to):
         number_episode = len(list_score)
 
     plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Best score average")
-    plt.title("Best score evolution")
+    plt.xlabel("Episode", fontsize=15)
+    plt.ylabel("Best score average", fontsize=15)
+    plt.title("Best score evolution", fontsize=16)
     plt.plot([*range(number_episode)], list_score)
     plt.savefig(PATH +"/" + "best_score_plot.png")
     # plt.show()
@@ -69,9 +69,9 @@ def plot_score(list_score,PATH,stop_to):
         number_episode = len(list_score)
 
     plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Score average")
-    plt.title("Score evolution")
+    plt.xlabel("Episode", fontsize=15)
+    plt.ylabel("Score average", fontsize=15)
+    plt.title("Score evolution", fontsize=16)
     plt.plot([*range(number_episode)], list_score)
     plt.savefig(PATH +"/" +  "score_plot.png")
     # plt.show()
@@ -178,33 +178,33 @@ def normal_plot(data,stop_to,name_experiment):
             bf_number_permutation, bf_best_score, bf_time = data[setting]
 
     plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Time (seconds)")
-    plt.title("Execution time on " + name_experiment + " dataset")
+    plt.xlabel("Episode", fontsize=15)
+    plt.ylabel("Time (seconds)", fontsize=15)
+    plt.title("Execution time on " + name_experiment + " dataset", fontsize=16)
     for index in range(len(list_time_series)):
         label = labels[index]
         time_series = list_time_series[index]
         plot(time_series,stop_to,label)
 
     if not "Hepatitis" in name_experiment:
-        plt.scatter(bf_number_permutation,bf_time,s=100,label="BRUTE_FORCE")
+        plt.scatter(bf_number_permutation,bf_time,s=75,label="BRUTE_FORCE", color='black')
 
-    plt.legend()
+    plt.legend(fontsize=12)
     plt.savefig("../ultimate_plot/"+ name_experiment + "_time_plot.png")
     plt.clf()
 
     plt.grid(True)
-    plt.xlabel("Episode")
-    plt.ylabel("Best score")
-    plt.title("Best score evolution on " + name_experiment + " dataset")
+    plt.xlabel("Episode", fontsize=15)
+    plt.ylabel("Best score", fontsize=15)
+    plt.title("Best score evolution on " + name_experiment + " dataset", fontsize=16)
     for index in range(len(list_best_score)):
         label = labels[index]
         best_score = list_best_score[index]
         plot(best_score,stop_to,label)
 
     if not "Hepatitis" in name_experiment:
-        plt.scatter(bf_number_permutation, bf_best_score, s=100, label="BRUTE_FORCE")
-    plt.legend()
+        plt.scatter(bf_number_permutation, bf_best_score, s=75, label="BRUTE_FORCE", color='black')
+    plt.legend(fontsize=12)
     plt.savefig("../ultimate_plot/"+ name_experiment + "_best_score_plot.png")
     plt.clf()
 
