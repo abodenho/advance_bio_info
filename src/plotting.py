@@ -203,7 +203,7 @@ def normal_plot(data,stop_to,name_experiment):
         plot(best_score,stop_to,label)
 
     if not "Hepatitis" in name_experiment:
-        plt.scatter(bf_number_permutation, bf_best_score, s=50, label="BRUTE_FORCE")
+        plt.scatter(bf_number_permutation, bf_best_score, s=100, label="BRUTE_FORCE")
     plt.legend()
     plt.savefig("../ultimate_plot/"+ name_experiment + "_best_score_plot.png")
     plt.clf()
