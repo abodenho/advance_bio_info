@@ -1,14 +1,14 @@
 ----------Score result----------
  
-Average score : 335.76 	 | STD score : 2.7608694282779838  
-Biggest score encounter : 348 	 | lowest score encounter : 335 
+Average score : 345.0 	 | STD score : 0.0  
+Biggest score encounter : 345 	 | lowest score encounter : 345 
  
 ----------AL, EM , CS----------
  
 From the best alignement encounter : 
- 	 - AL : 94 
- 	 - EM : 60 
- 	 - CS : 0.6382978723404256 
+ 	 - AL : 99 
+ 	 - EM : 64 
+ 	 - CS : 0.6464646464646465 
 From the worst alignement encounter : 
  	 - AL : 99 
  	 - EM : 64 
@@ -16,10 +16,10 @@ From the worst alignement encounter :
  
 ----------Reach best score----------
  
-Average episode to best score : 13.4
-Average time to best score : 0.0407147216796875
-STD episode to best score : 13.209087780766696
-STD  time to best score : 0.01859618860920578
+Average episode to best score : 61.6
+Average time to best score : 0.05681577920913696
+STD episode to best score : 99.56425061235582
+STD  time to best score : 0.026849137886824952
  
 ----------Experiment info----------
  
@@ -27,7 +27,7 @@ GAMMA : 0.9
 ALPHA : 0.8
 EPSILON : 0.2
 NUMBER_TRAINING_EPISODE : 1000
-NUMBER_REPITION_EXPERIMENT : 25
+NUMBER_REPITION_EXPERIMENT : 20
 USE_DYNAMIC_AGENT : True
 TREE_CHOICE : stupid_tree
 TRONCATE : True
@@ -37,10 +37,10 @@ MODE_NW : 1
 
 ----------Alignement----------
  
-BEST ENCOUNTER : [0, 2, 1]
-	 ATGACT-TTGCTGAGTGCTGAGGAGAATGCTCATGTCACCTCTCTGTGGGGCAAGGTGGATGTAGAGAAAGTTGGTGGCGAGGCCTTGGGCA-G
-	 ATGGTTGCACCTGACTGATGCTGAGAAGTCTGCTGTCTCTTGCCTGTGGGCAAAGGTGAACCCCGATGAAGTTGGTGGTGAGGCCCTGGGCAGG
-	 ATGG-TGCACCTGACTCCTGAGGAGAAGTCTGCCGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATGAAGTTGGTGGTGAGGCCCTGGGCAGG
+BEST ENCOUNTER : [1, 2, 0]
+	 ATG--G-TGCACCTGACTCCTGAGGAGAAGT-CTGC-CGTTACTGCCCTGTGGGGCAAGGTGAACGTGGATG-AAGTTGGTGGTGAGGCCCTGGGCAGG
+	 ATG--GTTGCACCTGACTGATGCTGAGAAGT-CTGC-TGTCTCTTGCCTGTGGGCAAAGGTGAACCCCGATG-AAGTTGGTGGTGAGGCCCTGGGCAGG
+	 ATGACTTTG---CTGAGTGCTGAGGAGAA-TGCT-CATGTCACCTCTCTGTGGGGCAAGGTGGATGTAGA-GAAAGTTGGTGGCGAGGCCTTGGGCA-G
 
  
  

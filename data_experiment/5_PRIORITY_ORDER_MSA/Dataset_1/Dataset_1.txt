@@ -1,7 +1,7 @@
 ----------Score result----------
  
-Average score : 163.0 	 | STD score : 0.0  
-Biggest score encounter : 163 	 | lowest score encounter : 163 
+Average score : 167.0 	 | STD score : 0.0  
+Biggest score encounter : 167 	 | lowest score encounter : 167 
  
 ----------AL, EM , CS----------
  
@@ -16,10 +16,10 @@ From the worst alignement encounter :
  
 ----------Reach best score----------
  
-Average episode to best score : 3.56
-Average time to best score : 0.003869304656982422
-STD episode to best score : 2.136913662270893
-STD  time to best score : 0.001100889646038431
+Average episode to best score : 4.2
+Average time to best score : 0.00464557409286499
+STD episode to best score : 2.293468988235943
+STD  time to best score : 0.0012984671581318039
  
 ----------Experiment info----------
  
@@ -27,7 +27,7 @@ GAMMA : 0.9
 ALPHA : 0.8
 EPSILON : 0.2
 NUMBER_TRAINING_EPISODE : 1000
-NUMBER_REPITION_EXPERIMENT : 25
+NUMBER_REPITION_EXPERIMENT : 20
 USE_DYNAMIC_AGENT : True
 TREE_CHOICE : stupid_tree
 TRONCATE : True

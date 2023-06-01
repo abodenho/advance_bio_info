@@ -1,7 +1,7 @@
 Numbre total different permutation : 6
 Best score : 348 
 Number alignement with this score : 2
-Time taken (in second) to run all permutation : 0.09242892265319824
+Time taken (in second) to run all permutation : 0.08252549171447754
 
 List index of those sequences : 
 (0, 2, 1)
